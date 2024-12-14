@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import background from '../../../../assets/books-bakground.png';
 
@@ -20,7 +19,7 @@ export const Content = styled.div`
 `;
 
 export const NavigationSection = styled.main`
-  width: 90%;
+  width: (40rem, 90%);
   background-color: #eeeeee;
   padding: 3rem;
   border-radius: 1rem;
@@ -35,42 +34,13 @@ export const NavigationSection = styled.main`
   }
 `;
 
-export const NavigationCardWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2rem;
-  width: 100%;
-`;
-
-export const NavigationCard = styled(Link)`
+export const NavigationWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 5.5rem;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  transition: all 0.3s ease-in-out;
+  gap: 2rem;
+  width: 100%;
 
-  > img {
-    width: 16rem;
-    height: 16rem;
-  }
-
-  > h2 {
-    font-weight: 900;
-    color: #1a1818;
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  &:last-child {
-    background-color: #bfbfbf;
-  }
-
-  &:hover {
-    filter: brightness(0.8);
+  > button {
+    width: 100%;
   }
 `;
