@@ -1,27 +1,13 @@
-import { MemoryRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Books from './pages/Books';
-
-function Hello() {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>SysBM</h1>
-      <div className="Hello">
-        <Link to="/books">Ir para books</Link>
-      </div>
-    </div>
-  );
-}
+import Home from './pages/Home';
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Hello />} />
+        <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
       </Routes>
     </Router>
