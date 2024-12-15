@@ -9,6 +9,7 @@ import './App.css';
 import Books from './pages/Books';
 import Home from './pages/Home';
 import Login from './pages/Login/login';
+import BookShelves from './pages/Bookshelves';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -26,6 +27,10 @@ export default function App() {
         <Route
           path="/books"
           element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/bookshelves"
+          element={isLoggedIn() ? <BookShelves /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>
