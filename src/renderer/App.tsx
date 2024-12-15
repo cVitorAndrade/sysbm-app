@@ -3,7 +3,11 @@ import './App.css';
 
 import Books from './pages/Books';
 import Home from './pages/Home';
-import Login from './pages/Login/Login';
+import Login from './pages/Login/login';
+import Readers from './pages/Readers/reader';
+import ReaderRegister from './pages/ReadersRegister/register';
+
+
 
 export default function App() {
   const isLoggedIn = () => {
@@ -13,9 +17,19 @@ export default function App() {
   return (
     <Router>
       <Routes>
+        {/* Rota de login */}
         <Route path="/login" element={<Login />} />
+
+        {/* Rota protegida: Home */}
         <Route path="/" element={isLoggedIn() ? <Home /> : <Navigate to="/login" />} />
+
+        {/* Rota protegida: Livros */}
         <Route path="/books" element={isLoggedIn() ? <Books /> : <Navigate to="/login" />} />
+
+        {/* Rota protegida: Leitores */}
+        <Route path="/readers" element={isLoggedIn() ? <Readers /> : <Navigate to="/login" />} />
+
+        <Route path="/ReadersRegister/register" element={<ReaderRegister />} />
       </Routes>
     </Router>
   );
