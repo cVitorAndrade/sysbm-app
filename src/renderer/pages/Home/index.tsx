@@ -41,7 +41,7 @@ export default function Home() {
               <img src={librarianIcon} alt="ícone de livros" />
               <h2>Bibliotecário</h2>
             </NavigationCard>
-            <NavigationCard to="/">
+            <NavigationCard to="/login">
               <img src={logoutIcon} alt="ícone de livros" />
               <h2>Finalizar sessão</h2>
             </NavigationCard>

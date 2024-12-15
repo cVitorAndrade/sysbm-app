@@ -1,0 +1,146 @@
+/* Remove margens e preenchimento padrão da página */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Estilo básico do container principal */
+.login-container {
+  display: flex; /* Layout flexível */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../../../../assets/background.jpg'); /* Fundo */
+  background-size: cover; /* Preenche toda a área */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 20px;
+  width: 380px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente os componentes */
+  align-items: center; /* Centraliza horizontalmente os componentes */
+  animation: fadeIn 0.5s ease-in-out;
+  gap: 10px; /* Espaçamento uniforme entre os elementos */
+}
+
+
+/* Animação */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.image-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Logo */
+.login-logo {
+  width: 180px; /* Tamanho da logo */
+  margin: 5px auto;
+}
+
+/* Título */
+h1 {
+  font-size: 50px; /* Ajusta o tamanho do título */
+  font-weight: bold;
+  color: #313b72;
+  margin-bottom: 10px; /* Espaço mínimo abaixo do título */
+}
+
+/* Grupo de inputs */
+.form-group {
+ /* Define a largura para se alinhar ao botão */
+  margin: 0 auto 15px auto; /* Centraliza os inputs horizontalmente */
+  text-align: left; /* Mantém o texto à esquerda */
+}
+
+
+/* Rótulos */
+.form-group label {
+  font-size: 18px; /* Aumenta a fonte do rótulo */
+  color: #555; /* Define a cor do texto */
+  margin-bottom: 5px; /* Espaço entre o rótulo e o campo */
+  display: block; /* Coloca o rótulo acima do campo */
+  padding-left: 5px; /* Ajuste adicional para alinhamento */
+}
+
+/* Campos de entrada */
+.form-group input {
+  padding: 12px; /* Define o espaçamento interno */
+  border-radius: 8px; /* Define cantos arredondados */
+  border: 1px solid #ddd; /* Define a borda */
+  font-size: 16px; /* Aumenta o tamanho da fonte */
+  background-color: #f9f9f9; /* Define a cor de fundo */
+  transition: 0.3s ease; /* Animação suave para foco */
+}
+
+.button-section {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+ /* Botão */
+.login-button {
+  width: 95%; /* Ajusta a largura do botão */
+  margin: auto;
+  padding: 15px; /* Define o espaçamento interno */
+  font-size: 16px; /* Ajusta o tamanho da fonte */
+  font-weight: bold; /* Define o texto em negrito */
+  text-transform: uppercase; /* Coloca o texto em maiúsculas */
+  color: #fff; /* Define a cor do texto */
+  background-color: #313b72; /* Define a cor do botão */
+  border: none; /* Remove a borda padrão */
+  border-radius: 8px; /* Define bordas arredondadas */
+  cursor: pointer; /* Define o cursor de ponteiro */
+  transition: background-color 0.3s ease; /* Animação na interação */
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Altera a cor ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .login-box {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .login-logo {
+    width: 140px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .form-group input {
+    font-size: 12px;
+  }
+
+  .login-button {
+    font-size: 12px;
+  }
+}
