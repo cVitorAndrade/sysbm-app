@@ -22,6 +22,7 @@ import ListBookshelves from './pages/ListBookShelves';
 import EditReaders from './pages/ReadersEdit';
 import BookEdit from './pages/BookEdit';
 import { useAuthStore } from './pages/store/authStore';
+import BookshelvesRegister from './pages/registershelves';
 
 export default function App() {
   const { userIsLogged } = useAuthStore();
@@ -85,6 +86,13 @@ export default function App() {
         <Route
           path="/relatorio"
           element={userIsLogged ? <Relatorio /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/bookshelves/register"
+          element={
+            userIsLogged ? <BookshelvesRegister /> : <Navigate to="/login" />
+          }
         />
 
         <Route
