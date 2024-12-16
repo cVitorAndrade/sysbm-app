@@ -12,7 +12,7 @@ export default function Header() {
 
         <Navigation>
           <Link to="/books">Livros</Link>
-          <Link to="/books">Leitores</Link>
+          <Link to="/readers">Leitores</Link>
           <Link to="/bookshelves">Estantes</Link>
           <Link to="/books">Empréstimos</Link>
         </Navigation>

@@ -12,6 +12,7 @@ import Login from './pages/Login/login';
 import Readers from './pages/Readers/reader';
 import ReaderRegister from './pages/ReadersRegister/register';
 import BookShelves from './pages/Bookshelves';
+import ListReaders from './pages/ListReaders';
 
 
 
@@ -41,6 +42,9 @@ export default function App() {
           path="/bookshelves"
           element={isLoggedIn() ? <BookShelves /> : <Navigate to="/login" />}
         />
+
+        <Route path="/ListReaders" element={<ListReaders />} />
+
       </Routes>
     </Router>
   );

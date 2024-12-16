@@ -23,7 +23,9 @@ export default function Readers() {
             <Link to={'/ReadersRegister/register'} style={{ width: "100%" }} >
               <Button title="CADASTRAR LEITORES" />
             </Link>
+            <Link to={'/ListReaders'} style={{ width: "100%" }} >
               <Button title="LISTAR LEITORES" />
+            </Link>
           </NavigationWrapper>
         </NavigationSection>
       </Content>

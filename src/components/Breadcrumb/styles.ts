@@ -13,7 +13,7 @@ export const Container = styled.nav`
     gap: 1rem;
     font-size: 2rem;
     font-weight: 500;
-    color: #ffffff;
+    color:rgb(255, 255, 255);
     transition: all 0.3s ease-in-out;
 
     &:hover {
