@@ -27,7 +27,7 @@ export default function Books() {
             <Link to="/book/register">
               <Button title="CADASTRAR LIVROS" />
             </Link>
-            <Link to="/book/register">
+            <Link to="/book/list">
               <Button title="ACESSAR ACERVO" />
             </Link>
             <Link to="/book/register">
