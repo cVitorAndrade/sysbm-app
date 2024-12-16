@@ -38,7 +38,12 @@ export const NavigationWrapper = styled.div`
   gap: 2rem;
   width: 100%;
 
-  > button {
+  > a {
     width: 100%;
+
+    > button {
+      cursor: pointer;
+      width: 100%;
+    }
   }
 `;

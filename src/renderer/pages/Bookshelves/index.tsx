@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -20,8 +21,12 @@ export default function BookShelves() {
           <img src={fullLogo} alt="Logo completa" />
 
           <NavigationWrapper>
-            <Button title="CADASTRAR ESTANTES" />
-            <Button title="LISTAR ESTANTES" />
+            <Link to="/bookshelves/register">
+              <Button title="CADASTRAR ESTANTES" />
+            </Link>
+            <Link to="/bookshelves/list">
+              <Button title="LISTAR ESTANTES" />
+            </Link>
           </NavigationWrapper>
         </NavigationSection>
       </Content>

@@ -15,6 +15,7 @@ import BookShelves from './pages/Bookshelves';
 import ListReaders from './pages/ListReaders';
 import BookRegister from './pages/BookRegister';
 import ListBooks from './pages/ListBook';
+import ListBookshelves from './pages/ListBookShelves';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -60,6 +61,13 @@ export default function App() {
         <Route
           path="/bookshelves"
           element={isLoggedIn() ? <BookShelves /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/bookshelves/list"
+          element={
+            isLoggedIn() ? <ListBookshelves /> : <Navigate to="/login" />
+          }
         />
 
         <Route path="/ListReaders" element={<ListReaders />} />
