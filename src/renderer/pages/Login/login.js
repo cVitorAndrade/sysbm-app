@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './Login.css';
-import logo from './../../../../assets/logo.png';
+import './login.css';
+import logo from '../../../../assets/logo.png';
 
-const Login = () => {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,11 +21,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-box">
         <div className="image-section">
-          <img
-            src={logo}
-            alt="SysBM Logo"
-            className="login-logo"
-          />
+          <img src={logo} alt="SysBM Logo" className="login-logo" />
         </div>
         <h1>SysBM</h1>
         <form onSubmit={handleSubmit}>
@@ -51,12 +47,14 @@ const Login = () => {
           </div>
 
           <div className="button-section">
-            <button type="submit" className="login-button">Login</button>
+            <button type="submit" className="login-button">
+              Login
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
-};
+}
 
 export default Login;

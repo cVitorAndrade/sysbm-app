@@ -34,7 +34,7 @@ export default function Home() {
               <img src={readerIcon} alt="ícone de livros" />
               <h2>Leitores</h2>
             </NavigationCard>
-            <NavigationCard to="/bookshelfs">
+            <NavigationCard to="/bookshelves">
               <img src={bookshelfIcon} alt="ícone de livros" />
               <h2>Estantes</h2>
             </NavigationCard>
