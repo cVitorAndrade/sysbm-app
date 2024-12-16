@@ -14,7 +14,8 @@ export default function Header() {
           <Link to="/books">Livros</Link>
           <Link to="/readers">Leitores</Link>
           <Link to="/bookshelves">Estantes</Link>
-          <Link to="/books">Empréstimos</Link>
+          <Link to="/emprestimo">Empréstimos</Link>
+          <Link to="/relatorio">Relatórios</Link>
         </Navigation>
       </Content>
     </Container>

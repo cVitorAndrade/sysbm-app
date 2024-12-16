@@ -13,8 +13,7 @@ import Readers from './pages/Readers/reader';
 import ReaderRegister from './pages/ReadersRegister/register';
 import BookShelves from './pages/Bookshelves';
 import ListReaders from './pages/ListReaders';
-
-
+import Relatorio from './pages/Relatorio';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -28,13 +27,22 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         {/* Rota protegida: Home */}
-        <Route path="/" element={isLoggedIn() ? <Home /> : <Navigate to="/login" />} />
+        <Route
+          path="/"
+          element={isLoggedIn() ? <Home /> : <Navigate to="/login" />}
+        />
 
         {/* Rota protegida: Livros */}
-        <Route path="/books" element={isLoggedIn() ? <Books /> : <Navigate to="/login" />} />
+        <Route
+          path="/books"
+          element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}
+        />
 
         {/* Rota protegida: Leitores */}
-        <Route path="/readers" element={isLoggedIn() ? <Readers /> : <Navigate to="/login" />} />
+        <Route
+          path="/readers"
+          element={isLoggedIn() ? <Readers /> : <Navigate to="/login" />}
+        />
 
         <Route path="/ReadersRegister/register" element={<ReaderRegister />} />
 
@@ -45,6 +53,10 @@ export default function App() {
 
         <Route path="/ListReaders" element={<ListReaders />} />
 
+        <Route
+          path="/relatorio"
+          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
       </Routes>
     </Router>
   );
