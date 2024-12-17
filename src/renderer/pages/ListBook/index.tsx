@@ -5,6 +5,7 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import SearchBar from '../../../components/SearchBar';
 import Scrollable from '../../../components/ScrollLabs';
 import Header from '../../../components/Header';
+import { Link } from 'react-router-dom';
 
 export default function ListBooks() {
   const allReaders = Array(20).fill({
@@ -39,9 +40,11 @@ export default function ListBooks() {
                   <p>{reader.phone}</p>
                 </div>
                 <Actions>
-                  <button type="button" className="edit">
-                    <FaEdit size={18} />
-                  </button>
+                  <Link to="/book/edit">
+                    <button type="button" className="edit">
+                      <FaEdit size={18} />
+                    </button>
+                  </Link>
                   <button type="button" className="delete">
                     <FaTrash size={18} />
                   </button>

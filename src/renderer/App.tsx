@@ -20,7 +20,7 @@ import BookRegister from './pages/BookRegister';
 import ListBooks from './pages/ListBook';
 import ListBookshelves from './pages/ListBookShelves';
 import EditReaders from './pages/ReadersEdit';
-
+import BookEdit from './pages/BookEdit';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -86,6 +86,11 @@ export default function App() {
         <Route
           path="/relatorio"
           element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/book/edit"
+          element={isLoggedIn() ? <BookEdit /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>
