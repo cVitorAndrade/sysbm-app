@@ -115,12 +115,11 @@ export default function EditReaders() {
             </FormRow>
 
             <ButtonWrapper>
-              <Button title="CANCELAR" onClick={function (): void {
-                throw new Error('Function not implemented.');
-              } } type={'button'}  />
-              <Button title="SALVAR" onClick={function (): void {
-                throw new Error('Function not implemented.');
-              } } type={'button'}  />
+                <Button
+                  title="CANCELAR"
+                  onClick={() => navigate("/Readers")}
+                />
+                <Button title="CONFIRMAR" type="submit" />
             </ButtonWrapper>
           </FormWrapper>
         </FormSection>
