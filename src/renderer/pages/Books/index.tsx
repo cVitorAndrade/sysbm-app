@@ -24,16 +24,10 @@ export default function Books() {
               <Button title="EMPRÉSTIMOS" />
             </Link>
             <Link to="/book/register">
-              <Button title="EMPRESTAR LIVROS" />
-            </Link>
-            <Link to="/book/register">
               <Button title="CADASTRAR LIVROS" />
             </Link>
             <Link to="/book/list">
               <Button title="ACESSAR ACERVO" />
-            </Link>
-            <Link to="/book/register">
-              <Button title="EMPRÉSTIMO" />
             </Link>
           </NavigationWrapper>
         </NavigationSection>
