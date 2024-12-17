@@ -34,13 +34,18 @@ export const NavigationSection = styled.main`
   }
 `;
 
-export const NavigationWrapper = styled.div`
+export const NavigationWrapper  = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   width: 100%;
 
-  > button {
+  > a{
     width: 100%;
+
+    > button {
+      width: 100%;
+      cursor: pointer;
+    }
   }
 `;

@@ -14,6 +14,7 @@ import ReaderRegister from './pages/ReadersRegister/register';
 import BookShelves from './pages/Bookshelves';
 import ListReaders from './pages/ListReaders';
 import Relatorio from './pages/Relatorio';
+import Loan from './pages/BooksLoans/Loan';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -37,6 +38,8 @@ export default function App() {
           path="/books"
           element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}
         />
+
+        <Route path="/loan" element={<Loan />} />
 
         {/* Rota protegida: Leitores */}
         <Route

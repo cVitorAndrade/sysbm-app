@@ -15,7 +15,7 @@ export default function Breadcrumb({ path = [] }: BreadcrumbProps) {
     <Container>
       {/* HOME sempre será o primeiro */}
       <Link to="/" style={{ color: isRegisterPage ? '#000' : '#fff' }}>
-        HOME <IoIosArrowForward />
+        <IoIosArrowForward />
       </Link>
 
       {/* Renderiza os demais itens do path */}

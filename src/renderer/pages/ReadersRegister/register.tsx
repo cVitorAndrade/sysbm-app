@@ -56,7 +56,7 @@ export default function ReaderRegister() {
               </FormField>
             </FormRow>
 
-            <ButtonWrapper>  
+            <ButtonWrapper>
               <Button title="CANCELAR" />
               <Button title="CADASTRAR"  />
             </ButtonWrapper>

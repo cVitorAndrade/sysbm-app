@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -18,12 +19,12 @@ export default function Books() {
         <Breadcrumb />
         <NavigationSection>
           <img src={fullLogo} alt="" />
-
           <NavigationWrapper>
-            <Button title="EMPRESTAR LIVROS" />
+            <Link to="/Loan">
+              <Button title="EMPRÉSTIMOS" />
+            </Link>
             <Button title="CADASTRAR LIVROS" />
             <Button title="ACESSAR ACERVO" />
-            <Button title="EMPRÉSTIMO" />
           </NavigationWrapper>
         </NavigationSection>
       </Content>
