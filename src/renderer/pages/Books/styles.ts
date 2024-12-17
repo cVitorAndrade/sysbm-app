@@ -5,7 +5,6 @@ export const Container = styled.div`
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
-  background-color: red;
   background-image: url(${background});
   background-position: center center;
   background-size: cover;
@@ -40,7 +39,11 @@ export const NavigationWrapper  = styled.div`
   gap: 2rem;
   width: 100%;
 
+<<<<<<< HEAD
   > a{
+=======
+  > a {
+>>>>>>> 99f5304a51f3e6991f0477da25e30d61ee881b56
     width: 100%;
 
     > button {
