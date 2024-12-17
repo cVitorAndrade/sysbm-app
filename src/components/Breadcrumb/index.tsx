@@ -4,26 +4,30 @@ import { Container } from './styles';
 
 // Definição do tipo das props
 interface BreadcrumbProps {
-  path: string[]; // Torna o path opcional
+  path?: string[]; // Permite o path ser opcional
 }
 
-export default function Breadcrumb({ path = [] }: BreadcrumbProps) {
-  const location = useLocation(); // Mantém a lógica de localização
-  const isRegisterPage = location.pathname === '/ListReaders';
+export default function Breadcrumb({ path }: BreadcrumbProps) {
+  const location = useLocation();
+  
+  // Gera um caminho dinâmico com base no pathname
+  const generatePath = () => {
+    const currentPath = location.pathname.split('/').filter(Boolean);
+    return path || currentPath;
+  };
+
+  const breadcrumbPath = generatePath();
 
   return (
     <Container>
-      {/* HOME sempre será o primeiro */}
-      <Link to="/" style={{ color: isRegisterPage ? '#000' : '#fff' }}>
-        <IoIosArrowForward />
+      {/* HOME como primeiro item */}
+      <Link to="/">
+        <span>Home</span>
       </Link>
-
-      {/* Renderiza os demais itens do path */}
-      {path.map((item, index) => (
-        // eslint-disable-next-line react/no-array-index-key
+      {breadcrumbPath.map((item, index) => (
         <span key={index}>
-          <Link to={`/${item.toLowerCase()}`}>{item}</Link>
-          {index < path.length - 1 && <IoIosArrowForward />}
+          <IoIosArrowForward />
+          <Link to={`/${item.toLowerCase()}`}>{item.replace('-', ' ')}</Link>
         </span>
       ))}
     </Container>

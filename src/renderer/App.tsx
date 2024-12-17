@@ -18,6 +18,8 @@ import Relatorio from './pages/Relatorio';
 import Loan from './pages/BooksLoans/Loan';
 import BookRegister from './pages/BookRegister';
 import ListBooks from './pages/ListBook';
+import EditReaders from './pages/ReadersEdit';
+
 
 export default function App() {
   const isLoggedIn = () => {
@@ -68,6 +70,11 @@ export default function App() {
 
         <Route path="/ListReaders" element={<ListReaders />} />
 
+        <Route
+          path="/relatorio"
+          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
+        <Route path="/ReadersEdit" element={<EditReaders />} />
         <Route
           path="/relatorio"
           element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}

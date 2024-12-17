@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/name-logo.png';
 import { Container, Content, Navigation } from './styles';
 
+
 export default function Header() {
   return (
     <Container>
