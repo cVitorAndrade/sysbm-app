@@ -21,6 +21,7 @@ import ListBooks from './pages/ListBook';
 import ListBookshelves from './pages/ListBookShelves';
 import EditReaders from './pages/ReadersEdit';
 import BookEdit from './pages/BookEdit';
+import BookshelvesRegister from './pages/registershelves';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -86,6 +87,11 @@ export default function App() {
         <Route
           path="/relatorio"
           element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/bookshelves/register"
+          element={isLoggedIn() ? <BookshelvesRegister /> : <Navigate to="/login" />}
         />
 
         <Route
