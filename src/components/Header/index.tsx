@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../../assets/name-logo.png';
 import { Container, Content, Navigation } from './styles';
 
+
 export default function Header() {
   return (
     <Container>
@@ -14,7 +15,8 @@ export default function Header() {
           <Link to="/books">Livros</Link>
           <Link to="/readers">Leitores</Link>
           <Link to="/bookshelves">Estantes</Link>
-          <Link to="/books">Empréstimos</Link>
+          <Link to="/loan">Empréstimos</Link>
+          <Link to="/relatorio">Relatórios</Link>
         </Navigation>
       </Content>
     </Container>

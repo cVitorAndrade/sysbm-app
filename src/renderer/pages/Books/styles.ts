@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import background from '../../../../assets/books-bakground.png';
+import background from '../../../../assets/background.jpg';
 
 export const Container = styled.div`
   min-height: 100vh;
@@ -33,13 +33,13 @@ export const NavigationSection = styled.main`
   }
 `;
 
-export const NavigationWrapper = styled.div`
+export const NavigationWrapper  = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   width: 100%;
 
-  > a {
+  > a{
     width: 100%;
 
     > button {

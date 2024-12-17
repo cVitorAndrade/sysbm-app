@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
+// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Books from './pages/Books';
 import Home from './pages/Home';
 import Login from './pages/Login/login';
@@ -13,9 +14,13 @@ import Readers from './pages/Readers/reader';
 import ReaderRegister from './pages/ReadersRegister/register';
 import BookShelves from './pages/Bookshelves';
 import ListReaders from './pages/ListReaders';
+import Relatorio from './pages/Relatorio';
+import Loan from './pages/BooksLoans/Loan';
 import BookRegister from './pages/BookRegister';
 import ListBooks from './pages/ListBook';
 import ListBookshelves from './pages/ListBookShelves';
+import EditReaders from './pages/ReadersEdit';
+
 
 export default function App() {
   const isLoggedIn = () => {
@@ -40,6 +45,7 @@ export default function App() {
           element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}
         />
 
+        <Route path="/loan" element={<Loan />} />
         <Route
           path="/book/register"
           element={isLoggedIn() ? <BookRegister /> : <Navigate to="/login" />}
@@ -71,6 +77,16 @@ export default function App() {
         />
 
         <Route path="/ListReaders" element={<ListReaders />} />
+
+        <Route
+          path="/relatorio"
+          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
+        <Route path="/ReadersEdit" element={<EditReaders />} />
+        <Route
+          path="/relatorio"
+          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
       </Routes>
     </Router>
   );

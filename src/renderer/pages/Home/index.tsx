@@ -4,6 +4,8 @@ import bookshelfIcon from '../../../../assets/bookshelf-icon.png';
 import monthlyReportsIcon from '../../../../assets/monthly-reports-icon.png';
 import logoutIcon from '../../../../assets/logout-icon.png';
 import fullLogo from '../../../../assets/full-logo.png';
+import Breadcrumb from '../../../components/Breadcrumb';
+
 
 import Header from '../../../components/Header';
 import {
@@ -13,8 +15,6 @@ import {
   NavigationCardWrapper,
   NavigationSection,
 } from './styles';
-
-import Breadcrumb from '../../../components/Breadcrumb';
 
 export default function Home() {
   return (
@@ -38,9 +38,9 @@ export default function Home() {
               <img src={bookshelfIcon} alt="ícone de livros" />
               <h2>Estantes</h2>
             </NavigationCard>
-            <NavigationCard to="/monthly-reports">
+            <NavigationCard to="/relatorio">
               <img src={monthlyReportsIcon} alt="ícone de livros" />
-              <h2>Bibliotecário</h2>
+              <h2>Relatorio mensal</h2>
             </NavigationCard>
             <NavigationCard to="/login">
               <img src={logoutIcon} alt="ícone de livros" />
