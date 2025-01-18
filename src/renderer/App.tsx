@@ -22,12 +22,17 @@ import ListBooks from './pages/ListBook';
 import ListBookshelves from './pages/ListBookShelves';
 import EditReaders from './pages/ReadersEdit';
 import BookEdit from './pages/BookEdit';
+import { useAuthStore } from './pages/store/authStore';
 import BookshelvesRegister from './pages/registershelves';
+import { ListLoansPage } from './pages/LoanList';
+
 
 export default function App() {
-  const isLoggedIn = () => {
-    return localStorage.getItem('userToken') !== null;
-  };
+  const { userIsLogged } = useAuthStore();
+
+  function isLoggedIn() {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <Router>
@@ -38,43 +43,43 @@ export default function App() {
         {/* Rota protegida: Home */}
         <Route
           path="/"
-          element={isLoggedIn() ? <Home /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Home /> : <Navigate to="/login" />}
         />
 
         {/* Rota protegida: Livros */}
         <Route
           path="/books"
-          element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Books /> : <Navigate to="/login" />}
         />
 
         <Route path="/loan" element={<Loan />} />
         <Route
           path="/book/register"
-          element={isLoggedIn() ? <BookRegister /> : <Navigate to="/login" />}
+          element={userIsLogged ? <BookRegister /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/book/list"
-          element={isLoggedIn() ? <ListBooks /> : <Navigate to="/login" />}
+          element={userIsLogged ? <ListBooks /> : <Navigate to="/login" />}
         />
 
         {/* Rota protegida: Leitores */}
         <Route
           path="/readers"
-          element={isLoggedIn() ? <Readers /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Readers /> : <Navigate to="/login" />}
         />
 
         <Route path="/ReadersRegister/register" element={<ReaderRegister />} />
 
         <Route
           path="/bookshelves"
-          element={isLoggedIn() ? <BookShelves /> : <Navigate to="/login" />}
+          element={userIsLogged ? <BookShelves /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/bookshelves/list"
           element={
-            isLoggedIn() ? <ListBookshelves /> : <Navigate to="/login" />
+            userIsLogged ? <ListBookshelves /> : <Navigate to="/login" />
           }
         />
 
@@ -82,25 +87,32 @@ export default function App() {
 
         <Route
           path="/relatorio"
-          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Relatorio /> : <Navigate to="/login" />}
         />
         {/* Nova rota para Gerar Relatório */}
         <Route
           path="/gerar-relatorio"
-          element={isLoggedIn() ? <GerarRelatorio /> : <Navigate to="/login" />}
+          element={userIsLogged() ? <GerarRelatorio /> : <Navigate to="/login" />}
         />
+        <Route path="/ReadersEdit" element={<EditReaders />} />
 
         <Route path="/ReadersEdit" element={<EditReaders />} />
         <Route
           path="/bookshelves/register"
           element={
-            isLoggedIn() ? <BookshelvesRegister /> : <Navigate to="/login" />
+            userIsLogged ? <BookshelvesRegister /> : <Navigate to="/login" />
           }
         />
 
         <Route
           path="/book/edit"
-          element={isLoggedIn() ? <BookEdit /> : <Navigate to="/login" />}
+          element={userIsLogged ? <BookEdit /> : <Navigate to="/login" />}
+        />
+
+        {/* Nova Rota: Gerenciar Empréstimos */}
+        <Route
+          path="/loan/manage"
+          element={userIsLogged ? <ListLoansPage /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>

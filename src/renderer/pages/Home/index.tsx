@@ -14,8 +14,10 @@ import {
   NavigationCardWrapper,
   NavigationSection,
 } from './styles';
+import { useAuthStore } from '../store/authStore';
 
 export default function Home() {
+  const { onLogout } = useAuthStore();
   return (
     <Container>
       <Header />
@@ -41,7 +43,7 @@ export default function Home() {
               <img src={monthlyReportsIcon} alt="ícone de livros" />
               <h2>Relatorio mensal</h2>
             </NavigationCard>
-            <NavigationCard to="/login">
+            <NavigationCard to="/login" onClick={() => onLogout()}>
               <img src={logoutIcon} alt="ícone de livros" />
               <h2>Finalizar sessão</h2>
             </NavigationCard>

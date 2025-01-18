@@ -21,7 +21,10 @@ export default function Books() {
           <img src={fullLogo} alt="" />
           <NavigationWrapper>
             <Link to="/Loan">
-              <Button title="EMPRÉSTIMOS" />
+              <Button title="CADASTRAR EMPRÉSTIMOS" />
+            </Link>
+            <Link to="/loan/manage">
+              <Button title="GERENCIAR EMPRÉSTIMOS" />
             </Link>
             <Link to="/book/register">
               <Button title="CADASTRAR LIVROS" />
