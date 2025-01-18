@@ -5,13 +5,12 @@ import Breadcrumb from '../../../components/Breadcrumb';
 import SearchBar from '../../../components/SearchBar';
 import Scrollable from '../../../components/ScrollLabs';
 import Header from '../../../components/Header';
-import { Link } from 'react-router-dom';
 
-export default function ListBooks() {
+export default function ListBookshelves() {
   const allReaders = Array(20).fill({
-    name: 'Nome do livro',
-    email: 'Numero Registro: 00000; Autor: Autor; Editora: Editora',
-    phone: 'Vol: 01; Exemplares: 01',
+    name: 'Estante A',
+    email: 'Prateleiras: 5',
+    phone: 'Descrição',
   });
 
   const [filteredReaders, setFilteredReaders] = useState(allReaders);
@@ -29,7 +28,7 @@ export default function ListBooks() {
       <Content>
         <Breadcrumb style={{ color: 'black' }} />
         <SearchBar onSearch={handleSearch} />
-        <h2>Acervo de livros</h2>
+        <h2>Lista de estantes</h2>
         <Scrollable>
           <ListWrapper>
             {filteredReaders.map((reader, index) => (
@@ -40,11 +39,9 @@ export default function ListBooks() {
                   <p>{reader.phone}</p>
                 </div>
                 <Actions>
-                  <Link to="/book/edit">
-                    <button type="button" className="edit">
-                      <FaEdit size={18} />
-                    </button>
-                  </Link>
+                  <button type="button" className="edit">
+                    <FaEdit size={18} />
+                  </button>
                   <button type="button" className="delete">
                     <FaTrash size={18} />
                   </button>

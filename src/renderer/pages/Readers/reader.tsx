@@ -20,10 +20,10 @@ export default function Readers() {
         <NavigationSection>
           <img src={fullLogo} alt="Logo SysBM" />
           <NavigationWrapper>
-            <Link to={'/ReadersRegister/register'} style={{ width: "100%" }} >
+            <Link to={'/ReadersRegister/register'} style={{ width: '100%' }}>
               <Button title="CADASTRAR LEITORES" />
             </Link>
-            <Link to={'/ListReaders'} style={{ width: "100%" }} >
+            <Link to={'/ListReaders'} style={{ width: '100%' }}>
               <Button title="LISTAR LEITORES" />
             </Link>
           </NavigationWrapper>

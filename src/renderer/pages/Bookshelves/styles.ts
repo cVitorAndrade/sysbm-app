@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import background from '../../../../assets/books-bakground.png';
+import background from '../../../../assets/background.jpg';
 
 export const Container = styled.div`
   min-height: 100vh;
@@ -38,7 +38,12 @@ export const NavigationWrapper = styled.div`
   gap: 2rem;
   width: 100%;
 
-  > button {
+  > a {
     width: 100%;
+
+    > button {
+      cursor: pointer;
+      width: 100%;
+    }
   }
 `;

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
+// Importações de páginas
 import Books from './pages/Books';
 import Home from './pages/Home';
 import Login from './pages/Login/login';
@@ -15,9 +15,14 @@ import ReaderRegister from './pages/ReadersRegister/register';
 import BookShelves from './pages/Bookshelves';
 import ListReaders from './pages/ListReaders';
 import Relatorio from './pages/Relatorio';
+import GerarRelatorio from './pages/GerarRelatorio'; // Atualizado para o nome correto
 import Loan from './pages/BooksLoans/Loan';
 import BookRegister from './pages/BookRegister';
 import ListBooks from './pages/ListBook';
+import ListBookshelves from './pages/ListBookShelves';
+import EditReaders from './pages/ReadersEdit';
+import BookEdit from './pages/BookEdit';
+import BookshelvesRegister from './pages/registershelves';
 
 export default function App() {
   const isLoggedIn = () => {
@@ -66,11 +71,36 @@ export default function App() {
           element={isLoggedIn() ? <BookShelves /> : <Navigate to="/login" />}
         />
 
+        <Route
+          path="/bookshelves/list"
+          element={
+            isLoggedIn() ? <ListBookshelves /> : <Navigate to="/login" />
+          }
+        />
+
         <Route path="/ListReaders" element={<ListReaders />} />
 
         <Route
           path="/relatorio"
           element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+        />
+        {/* Nova rota para Gerar Relatório */}
+        <Route
+          path="/gerar-relatorio"
+          element={isLoggedIn() ? <GerarRelatorio /> : <Navigate to="/login" />}
+        />
+
+        <Route path="/ReadersEdit" element={<EditReaders />} />
+        <Route
+          path="/bookshelves/register"
+          element={
+            isLoggedIn() ? <BookshelvesRegister /> : <Navigate to="/login" />
+          }
+        />
+
+        <Route
+          path="/book/edit"
+          element={isLoggedIn() ? <BookEdit /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>

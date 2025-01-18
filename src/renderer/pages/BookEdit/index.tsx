@@ -1,9 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import fullLogo from '../../../../assets/full-logo.png';
-import Breadcrumb from '../../../components/Breadcrumb';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
+import Breadcrumb from '../../../components/Breadcrumb';
 import Header from '../../../components/Header';
-
 import {
   Container,
   Content,
@@ -14,8 +13,29 @@ import {
   ButtonWrapper,
 } from './styles';
 
-export default function BookRegister() {
+export default function BookEdit() {
+  const { state } = useLocation(); // Captura os dados enviados pela rota
   const navigate = useNavigate();
+
+  // Dados iniciais do formulário (usando os dados passados na navegação)
+  const [formData, setFormData] = useState({
+    name: state?.reader?.name || '',
+    email: state?.reader?.email || '',
+    phone: state?.reader?.phone || '',
+    cpf: state?.reader?.cpf || '',
+    address: state?.reader?.address || '',
+    enrollment: state?.reader?.enrollment || '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSave = () => {
+    console.log('Dados atualizados:', formData);
+    navigate('/readers'); // Volta para a listagem
+  };
 
   return (
     <Container>
@@ -23,8 +43,7 @@ export default function BookRegister() {
       <Content>
         <Breadcrumb />
         <FormSection>
-          <img src={fullLogo} alt="Logo SysBM" />
-          <h2>Cadastro de livros</h2>
+          <h2>Editar Livro</h2>
           <FormWrapper>
             <FormRow>
               <FormField>

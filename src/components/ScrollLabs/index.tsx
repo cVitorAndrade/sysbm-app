@@ -6,6 +6,11 @@ interface ScrollableProps {
   height?: string; // Altura opcional do container
 }
 
-export default function Scrollable({ children, height = '60vh' }: ScrollableProps) {
-  return <ScrollContainer style={{ maxHeight: height }}>{children}</ScrollContainer>;
+export default function Scrollable({
+  children,
+  height = '60vh',
+}: ScrollableProps) {
+  return (
+    <ScrollContainer style={{ maxHeight: height }}>{children}</ScrollContainer>
+  );
 }

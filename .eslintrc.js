@@ -1,8 +1,16 @@
 module.exports = {
   extends: 'erb',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'jsx-a11y'], // Certifique-se de incluir o plugin jsx-a11y
   rules: {
-    // A temporary hack related to IDE not resolving correct package.json
+    // Regras personalizadas
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        assert: 'htmlFor', // Use o atributo htmlFor para associação
+        depth: 3, // Permite elementos de controle aninhados até 3 níveis
+      },
+    ],
+    // Outras regras existentes
     'import/no-extraneous-dependencies': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',
@@ -22,7 +30,6 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      // See https://github.com/benmosher/eslint-plugin-import/issues/1396#issuecomment-575727774 for line below
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
         moduleDirectory: ['node_modules', 'src/'],

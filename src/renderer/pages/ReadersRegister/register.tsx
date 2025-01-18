@@ -58,7 +58,7 @@ export default function ReaderRegister() {
 
             <ButtonWrapper>
               <Button title="CANCELAR" />
-              <Button title="CADASTRAR"  />
+              <Button title="CADASTRAR" />
             </ButtonWrapper>
           </FormWrapper>
         </FormSection>

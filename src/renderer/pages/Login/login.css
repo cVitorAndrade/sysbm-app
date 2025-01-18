@@ -1,5 +1,6 @@
 /* Remove margens e preenchimento padrão da página */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -35,7 +36,6 @@ body, html {
   gap: 10px; /* Espaçamento uniforme entre os elementos */
 }
 
-
 /* Animação */
 @keyframes fadeIn {
   from {
@@ -70,11 +70,10 @@ h1 {
 
 /* Grupo de inputs */
 .form-group {
- /* Define a largura para se alinhar ao botão */
+  /* Define a largura para se alinhar ao botão */
   margin: 0 auto 15px auto; /* Centraliza os inputs horizontalmente */
   text-align: left; /* Mantém o texto à esquerda */
 }
-
 
 /* Rótulos */
 .form-group label {
@@ -101,7 +100,7 @@ h1 {
   justify-content: center;
 }
 
- /* Botão */
+/* Botão */
 .login-button {
   width: 95%; /* Ajusta a largura do botão */
   margin: auto;

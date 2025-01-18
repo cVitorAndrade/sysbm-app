@@ -4,6 +4,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Breadcrumb from '../../../components/Breadcrumb';
 import SearchBar from '../../../components/SearchBar';
 import Scrollable from '../../../components/ScrollLabs';
+import { Link } from 'react-router-dom';
 
 export default function ListReaders() {
   const allReaders = Array(20).fill({
@@ -16,7 +17,7 @@ export default function ListReaders() {
 
   const handleSearch = (query: string) => {
     const filtered = allReaders.filter((reader) =>
-      reader.name.toLowerCase().includes(query.toLowerCase())
+      reader.name.toLowerCase().includes(query.toLowerCase()),
     );
     setFilteredReaders(filtered);
   };
@@ -37,9 +38,11 @@ export default function ListReaders() {
                   <p>{reader.phone}</p>
                 </div>
                 <Actions>
-                  <button className="edit">
-                    <FaEdit size={18} />
-                  </button>
+                  <Link to={'/ReadersEdit'}>
+                    <button className="edit">
+                      <FaEdit size={18} />
+                    </button>
+                  </Link>
                   <button className="delete">
                     <FaTrash size={18} />
                   </button>
