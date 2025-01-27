@@ -21,11 +21,10 @@ import ListBooks from './pages/ListBook';
 import ListBookshelves from './pages/ListBookShelves';
 import EditReaders from './pages/ReadersEdit';
 import BookEdit from './pages/BookEdit';
+import { useAuthStore } from './pages/store/authStore';
 
 export default function App() {
-  const isLoggedIn = () => {
-    return localStorage.getItem('userToken') !== null;
-  };
+  const { userIsLogged } = useAuthStore();
 
   return (
     <Router>
@@ -36,43 +35,43 @@ export default function App() {
         {/* Rota protegida: Home */}
         <Route
           path="/"
-          element={isLoggedIn() ? <Home /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Home /> : <Navigate to="/login" />}
         />
 
         {/* Rota protegida: Livros */}
         <Route
           path="/books"
-          element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Books /> : <Navigate to="/login" />}
         />
 
         <Route path="/loan" element={<Loan />} />
         <Route
           path="/book/register"
-          element={isLoggedIn() ? <BookRegister /> : <Navigate to="/login" />}
+          element={userIsLogged ? <BookRegister /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/book/list"
-          element={isLoggedIn() ? <ListBooks /> : <Navigate to="/login" />}
+          element={userIsLogged ? <ListBooks /> : <Navigate to="/login" />}
         />
 
         {/* Rota protegida: Leitores */}
         <Route
           path="/readers"
-          element={isLoggedIn() ? <Readers /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Readers /> : <Navigate to="/login" />}
         />
 
         <Route path="/ReadersRegister/register" element={<ReaderRegister />} />
 
         <Route
           path="/bookshelves"
-          element={isLoggedIn() ? <BookShelves /> : <Navigate to="/login" />}
+          element={userIsLogged ? <BookShelves /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/bookshelves/list"
           element={
-            isLoggedIn() ? <ListBookshelves /> : <Navigate to="/login" />
+            userIsLogged ? <ListBookshelves /> : <Navigate to="/login" />
           }
         />
 
@@ -80,17 +79,17 @@ export default function App() {
 
         <Route
           path="/relatorio"
-          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Relatorio /> : <Navigate to="/login" />}
         />
         <Route path="/ReadersEdit" element={<EditReaders />} />
         <Route
           path="/relatorio"
-          element={isLoggedIn() ? <Relatorio /> : <Navigate to="/login" />}
+          element={userIsLogged ? <Relatorio /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/book/edit"
-          element={isLoggedIn() ? <BookEdit /> : <Navigate to="/login" />}
+          element={userIsLogged ? <BookEdit /> : <Navigate to="/login" />}
         />
       </Routes>
     </Router>

@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import './login.css';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../../../assets/logo.png';
+import useAuth from '../../hooks/useAuth';
+import { useAuthStore } from '../store/authStore';
 
 function Login() {
+  const onAuth = useAuth();
+  const { onLogin } = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Simula autenticação
-    if (email === 'teste@email.com' && password === '123456') {
-      localStorage.setItem('userToken', 'token_de_exemplo');
-      window.location.href = '/'; // Redireciona para a home
-    } else {
-      alert('Credenciais inválidas!');
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      await onAuth({ email, password });
+      onLogin();
+      navigate('/');
+    } catch (error) {
+      console.log('Login: ', error);
     }
   };
 
