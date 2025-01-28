@@ -92,7 +92,7 @@ export default function App() {
         {/* Nova rota para Gerar Relatório */}
         <Route
           path="/gerar-relatorio"
-          element={userIsLogged() ? <GerarRelatorio /> : <Navigate to="/login" />}
+          element={userIsLogged ? <GerarRelatorio /> : <Navigate to="/login" />}
         />
         <Route path="/ReadersEdit" element={<EditReaders />} />
 
