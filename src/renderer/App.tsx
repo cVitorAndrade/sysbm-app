@@ -26,13 +26,8 @@ import { useAuthStore } from './pages/store/authStore';
 import BookshelvesRegister from './pages/registershelves';
 import { ListLoansPage } from './pages/LoanList';
 
-
 export default function App() {
   const { userIsLogged } = useAuthStore();
-
-  function isLoggedIn() {
-    throw new Error('Function not implemented.');
-  }
 
   return (
     <Router>
