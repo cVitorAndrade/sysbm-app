@@ -72,9 +72,9 @@
   },
   "dependencies": {
     "@electron/notarize": "^2.3.2",
-    "@hookform/resolvers": "^3.9.1",
-    "chart.js": "^4.4.7",
+    "@hookform/resolvers": "^3.10.0",
     "axios": "^1.7.9",
+    "chart.js": "^4.4.7",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",

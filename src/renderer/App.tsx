@@ -15,7 +15,7 @@ import ReaderRegister from './pages/ReadersRegister/register';
 import BookShelves from './pages/Bookshelves';
 import ListReaders from './pages/ListReaders';
 import Relatorio from './pages/Relatorio';
-import GerarRelatorio from './pages/GerarRelatorio'; // Atualizado para o nome correto
+import GerarRelatorio from './pages/GerarRelatorio';
 import Loan from './pages/BooksLoans/Loan';
 import BookRegister from './pages/BookRegister';
 import ListBooks from './pages/ListBook';
