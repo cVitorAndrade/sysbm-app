@@ -6,4 +6,9 @@ export const BookshelfService = {
     const { data } = await Api.post<IBookshelf>('/bookshelf', payload);
     return data;
   },
+
+  async getAllBookshelf() {
+    const { data } = await Api.get<IBookshelf[]>('/bookshelf');
+    return data;
+  },
 };

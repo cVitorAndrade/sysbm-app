@@ -6,4 +6,9 @@ export const ShelfService = {
     const { data } = await Api.post<IShelf>('/shelf', payload);
     return data;
   },
+
+  async getAllShelves() {
+    const { data } = await Api.get<IShelf[]>('/shelf');
+    return data;
+  },
 };

@@ -3,7 +3,7 @@ import { ScrollContainer } from './styles';
 
 interface ScrollableProps {
   children: React.ReactNode;
-  height?: string; // Altura opcional do container
+  height?: string;
 }
 
 export default function Scrollable({
@@ -11,6 +11,8 @@ export default function Scrollable({
   height = '60vh',
 }: ScrollableProps) {
   return (
-    <ScrollContainer style={{ maxHeight: height }}>{children}</ScrollContainer>
+    <ScrollContainer style={{ maxHeight: height, paddingBottom: '16px' }}>
+      {children}
+    </ScrollContainer>
   );
 }
