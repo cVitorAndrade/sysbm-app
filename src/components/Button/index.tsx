@@ -10,9 +10,10 @@ export default function Button({
   title,
   onClick,
   type = 'button',
+  ...rest
 }: ButtonProps) {
   return (
-    <Container as="button" type={type} onClick={onClick}>
+    <Container {...rest} as="button" type={type} onClick={onClick}>
       {title}
     </Container>
   );

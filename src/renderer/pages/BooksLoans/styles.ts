@@ -25,6 +25,8 @@ export const FormSection = styled.section`
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 80vh;
+  overflow: auto;
 
   > img {
     width: 200px;
@@ -60,13 +62,16 @@ export const FormField = styled.div`
   flex-direction: column;
   flex: 1;
 
-  > label {
+  > label,
+  > div > label {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
     color: #555;
   }
 
-  > input {
+  > input,
+  > div > input,
+  > textarea {
     padding: 0.8rem;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
@@ -76,6 +81,15 @@ export const FormField = styled.div`
       outline: none;
       border-color: #007bff;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  > textarea {
+    resize: none;
+    height: 10rem;
   }
 `;
 

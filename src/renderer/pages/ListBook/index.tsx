@@ -77,6 +77,7 @@ export default function ListBooks() {
               <ListItem key={book.id}>
                 <div className="info">
                   <strong>{book.title}</strong>
+                  <p>ISBN: {book.isbn}</p>
                   <p>Autor: {book.author}</p>
                   <p>Editora: {book.publisher}</p>
                   <p>Total de exemplares: {book.copies}</p>

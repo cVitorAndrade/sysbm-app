@@ -11,4 +11,9 @@ export const BookService = {
     const { data } = await Api.get<IBook[]>('/book');
     return data;
   },
+
+  async getBookByIsbn(isbn: string) {
+    const { data } = await Api.get<IBook>(`/book/isbn/${isbn}`);
+    return data;
+  },
 };

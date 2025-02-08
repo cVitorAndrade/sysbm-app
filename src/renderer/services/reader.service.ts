@@ -6,4 +6,9 @@ export const ReaderService = {
     const { data } = await Api.post<IReader>('/reader', payload);
     return data;
   },
+
+  async getReaderByCpf(cpf: string) {
+    const { data } = await Api.get<IReader>(`/reader/cpf/${cpf}`);
+    return data;
+  },
 };

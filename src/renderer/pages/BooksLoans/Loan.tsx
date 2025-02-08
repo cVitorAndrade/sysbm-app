@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
+import { z } from 'zod';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -13,81 +17,162 @@ import {
   FormRow,
   ButtonWrapper,
 } from './styles';
+import { ReaderService } from '../../services/reader.service';
+import { BookService } from '../../services/book.service';
+import { LoanService } from '../../services/loan.service';
 
-// Mock de dados dos livros
-const mockBooks = {
-  '123456': {
-    titulo: 'O Senhor dos Anéis',
-    autor: 'J.R.R. Tolkien',
-    volume: 'Volume 1',
-    estante: 'A-12',
-  },
-  '654321': {
-    titulo: '1984',
-    autor: 'George Orwell',
-    volume: 'Edição Especial',
-    estante: 'B-5',
-  },
-  '111222': {
-    titulo: 'Dom Casmurro',
-    autor: 'Machado de Assis',
-    volume: 'Volume Único',
-    estante: 'C-7',
-  },
-};
+interface BookDetails {
+  isbn: string;
+  author: string;
+  title: string;
+  volume: string;
+  publicationYear: string;
+  notes: string;
+  bookConditionDelivery: string;
+  bookId: string;
+}
+
+const loanSchema = z.object({
+  user: z.object({
+    id: z.string(),
+    cpf: z.string().min(11, 'CPF inválido'),
+    name: z.string().optional(),
+    email: z.string().optional(),
+    phoneNumber: z.string().optional(),
+    status: z.string().optional(),
+    birthDate: z.string().optional(),
+  }),
+  books: z.array(
+    z.object({
+      isbn: z.string().min(10, 'ISBN inválido'),
+      title: z.string().optional(),
+      author: z.string().optional(),
+      volume: z.string().optional(),
+      publicationYear: z.string().optional(),
+      notes: z.string().optional(),
+      bookConditionDelivery: z.string({ required_error: 'Campo obrigatório' }),
+      bookId: z.string(),
+    }),
+  ),
+});
 
 export default function EmprestimoRegister() {
-  // Estado inicial do formulário
-  const initialFormData = {
-    codLivro: '',
-    cpf: '',
-    nome: '',
-    titulo: '',
-    autor: '',
-    volume: '',
-    estante: '',
-    dataEmprestimo: '',
-    dataDevolucao: '',
-    observacao: '',
+  const {
+    register,
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(loanSchema),
+    defaultValues: {
+      user: {
+        cpf: '',
+        name: '',
+        email: '',
+        phoneNumber: '',
+        birthDate: '',
+        id: '',
+      },
+      books: [] as BookDetails[],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'books',
+  });
+
+  const readerCpf = watch('user.cpf');
+  const books = watch('books');
+
+  const addBook = () => {
+    append({
+      isbn: '',
+      title: '',
+      author: '',
+      volume: '',
+      publicationYear: '',
+      notes: '',
+      bookConditionDelivery: '',
+      bookId: '',
+    });
   };
 
-  const [formData, setFormData] = useState(initialFormData);
+  const onGetReader = useCallback(async () => {
+    try {
+      const reader = await ReaderService.getReaderByCpf(readerCpf);
+      setValue('user.id', reader.id);
+      setValue('user.email', reader.email);
+      setValue('user.name', reader.name);
+      setValue('user.phoneNumber', reader.phoneNumber);
+      setValue(
+        'user.birthDate',
+        new Date(reader.birtDate).toLocaleDateString('pt-BR'),
+      );
+    } catch (error) {
+      console.log('EmprestimoRegister - onGetReader: ', error);
+    }
+  }, [readerCpf, setValue]);
 
-  // Atualiza o estado ao alterar campos
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const onGetBook = useCallback(
+    async (index: number, isbn: string) => {
+      try {
+        const book = await BookService.getBookByIsbn(isbn);
+        setValue(`books.${index}.title`, book.title);
+        setValue(`books.${index}.author`, book.author);
+        setValue(`books.${index}.publicationYear`, book.publicationYear);
+        setValue(`books.${index}.volume`, book.volume);
+        setValue(`books.${index}.notes`, book.notes ?? '');
+        setValue(`books.${index}.bookId`, book.id);
+      } catch (error) {
+        console.error('mprestimoRegister - onGetReader: ', error);
+      }
+    },
+    [setValue],
+  );
 
-  // Busca os dados do livro no mock com base no código
-  const handleBlur = () => {
-    const bookData = mockBooks[formData.codLivro];
-    if (bookData) {
-      setFormData((prev) => ({
-        ...prev,
-        titulo: bookData.titulo,
-        autor: bookData.autor,
-        volume: bookData.volume,
-        estante: bookData.estante, // Incluindo a estante
-      }));
-    } else {
-      alert('Livro não encontrado! Verifique o código.');
-      setFormData((prev) => ({
-        ...prev,
-        titulo: '',
-        autor: '',
-        volume: '',
-        estante: '',
-      }));
+  const onSubmit = async (values: z.infer<typeof loanSchema>) => {
+    try {
+      const { user, books: allBooks } = values;
+
+      const loanPromises = allBooks.map(({ bookId, bookConditionDelivery }) =>
+        LoanService.createLoan({
+          bookId,
+          readerId: user.id,
+          bookConditionDelivery: bookConditionDelivery || 'Perfeitas condições',
+          observation: '',
+        }),
+      );
+
+      const response = await Promise.all(loanPromises);
+      console.log({ response });
+
+      alert('Empréstimo realizado com sucesso');
+    } catch (error) {
+      console.log('EmprestimoRegister - onSubmit: ', error);
+    } finally {
+      reset();
     }
   };
 
-  // Submete o formulário
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Dados do Empréstimo:', formData);
-    alert('Empréstimo cadastrado com sucesso!');
-  };
+  useEffect(() => {
+    const cpfIsComplete = readerCpf.length === 11;
+    if (cpfIsComplete) {
+      onGetReader();
+    }
+  }, [readerCpf, onGetReader]);
+
+  useEffect(() => {
+    books.forEach((book, index) => {
+      const cleanIsbn = book.isbn.replace(/[^0-9Xx]/g, '');
+      if (cleanIsbn.length === 10 || cleanIsbn.length === 13) {
+        onGetBook(index, book.isbn);
+      }
+    });
+  }, [books.map((book) => book.isbn).join(','), onGetBook, books]);
 
   return (
     <Container>
@@ -97,126 +182,175 @@ export default function EmprestimoRegister() {
         <FormSection>
           <img src={fullLogo} alt="Logo SysBM" />
           <h2>Cadastro de Empréstimo</h2>
-          <FormWrapper onSubmit={handleSubmit}>
+          <FormWrapper
+            onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}
+          >
             <FormRow>
-              <FormField>
-                <label>Código do Livro</label>
-                <input
-                  type="text"
-                  name="codLivro"
-                  placeholder="123456"
-                  value={formData.codLivro}
-                  onChange={handleChange}
-                  onBlur={handleBlur} // Busca os dados do livro ao sair do campo
-                />
-              </FormField>
               <FormField>
                 <label>CPF</label>
                 <input
                   type="text"
-                  name="cpf"
+                  {...register('user.cpf')}
                   placeholder="000.000.000-00"
-                  value={formData.cpf}
-                  onChange={handleChange}
                 />
+                {errors.user?.cpf && <span>{errors.user?.cpf.message}</span>}
               </FormField>
             </FormRow>
 
             <FormRow>
               <FormField>
-                <label>Título</label>
-                <input
-                  type="text"
-                  name="titulo"
-                  placeholder="Título do livro"
-                  value={formData.titulo}
-                  disabled
-                />
+                <label>Nome</label>
+                <input type="text" {...register('user.name')} disabled />
               </FormField>
               <FormField>
-                <label>Nome Completo</label>
-                <input
-                  type="text"
-                  name="nome"
-                  placeholder="Nome do Leitor"
-                  value={formData.nome}
-                  onChange={handleChange}
-                />
+                <label>Email</label>
+                <input type="text" {...register('user.email')} disabled />
               </FormField>
             </FormRow>
 
             <FormRow>
               <FormField>
-                <label>Autor</label>
-                <input
-                  type="text"
-                  name="autor"
-                  placeholder="Nome do Autor"
-                  value={formData.autor}
-                  disabled
-                />
+                <label>Telefone</label>
+                <input type="text" {...register('user.phoneNumber')} disabled />
               </FormField>
               <FormField>
-                <label>Volume</label>
-                <input
-                  type="text"
-                  name="volume"
-                  placeholder="Volume do livro"
-                  value={formData.volume}
-                  disabled
-                />
+                <label>Data de nascimento</label>
+                <input type="text" {...register('user.birthDate')} disabled />
               </FormField>
             </FormRow>
 
-            <FormRow>
-              <FormField>
-                <label>Estante</label>
-                <input
-                  type="text"
-                  name="estante"
-                  placeholder="Posição na Estante"
-                  value={formData.estante}
-                  disabled
-                />
-              </FormField>
-              <FormField>
-                <label>Data de Empréstimo</label>
-                <input
-                  type="date"
-                  name="dataEmprestimo"
-                  value={formData.dataEmprestimo}
-                  onChange={handleChange}
-                />
-              </FormField>
-            </FormRow>
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem',
+                }}
+              >
+                <FormRow>
+                  <FormField
+                    style={{
+                      display: 'flex',
+                      gap: '1rem',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <button
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        alignSelf: 'end',
+                      }}
+                      onClick={() => remove(index)}
+                      type="button"
+                    >
+                      <IoMdClose size={20} color="red" />
+                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label>ISBN</label>
+                      <input
+                        type="text"
+                        {...register(`books.${index}.isbn`)}
+                        placeholder="ISBN"
+                      />
+                      {errors?.books?.[index]?.isbn && (
+                        <span>{errors?.books?.[index]?.isbn?.message}</span>
+                      )}
+                    </div>
+                  </FormField>
+                  <FormField>
+                    <label>Título</label>
+                    <input
+                      type="text"
+                      {...register(`books.${index}.title`)}
+                      disabled
+                    />
+                  </FormField>
+                  <FormField>
+                    <label>Autor</label>
+                    <input
+                      type="text"
+                      {...register(`books.${index}.author`)}
+                      disabled
+                    />
+                  </FormField>
+                </FormRow>
 
-            <FormRow>
-              <FormField>
-                <label>Data de Devolução</label>
-                <input
-                  type="date"
-                  name="dataDevolucao"
-                  value={formData.dataDevolucao}
-                  onChange={handleChange}
+                <FormRow>
+                  <FormField />
+                  <FormField>
+                    <label>Volume</label>
+                    <input
+                      type="text"
+                      {...register(`books.${index}.volume`)}
+                      disabled
+                    />
+                  </FormField>
+                  <FormField>
+                    <label>Ano de publicação</label>
+                    <input
+                      type="text"
+                      {...register(`books.${index}.publicationYear`)}
+                      disabled
+                    />
+                  </FormField>
+                </FormRow>
+
+                <FormRow>
+                  <FormField />
+                  <FormField style={{ flex: '2.09' }}>
+                    <label>Observações</label>
+                    <input
+                      type="text"
+                      {...register(`books.${index}.notes`)}
+                      disabled
+                    />
+                  </FormField>
+                </FormRow>
+
+                <FormRow>
+                  <FormField />
+                  <FormField style={{ flex: '2.09' }}>
+                    <label>Condição do livro no empréstimo</label>
+                    <textarea
+                      {...register(`books.${index}.bookConditionDelivery`)}
+                    />
+                    {errors?.books?.[index]?.bookConditionDelivery && (
+                      <span>
+                        {errors?.books?.[index]?.bookConditionDelivery?.message}
+                      </span>
+                    )}
+                  </FormField>
+                </FormRow>
+
+                <hr />
+              </div>
+            ))}
+
+            {books.length < 3 && (
+              <ButtonWrapper style={{ marginBlock: '2rem' }}>
+                <Button
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: '2px dashed #007bff',
+                    color: '#007bff',
+                    padding: '0.8rem',
+                    borderRadius: '0.5rem',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    width: '100%',
+                  }}
+                  title="Adicionar Livro"
+                  onClick={addBook}
                 />
-              </FormField>
-              <FormField>
-                <label>Observação</label>
-                <input
-                  type="text"
-                  name="observacao"
-                  placeholder="Observações adicionais"
-                  value={formData.observacao}
-                  onChange={handleChange}
-                />
-              </FormField>
-            </FormRow>
+              </ButtonWrapper>
+            )}
 
             <ButtonWrapper>
-              <Button
-                title="CANCELAR"
-                onClick={() => setFormData(initialFormData)}
-              />
+              <Button title="CANCELAR" type="button" />
               <Button title="CONFIRMAR" type="submit" />
             </ButtonWrapper>
           </FormWrapper>
