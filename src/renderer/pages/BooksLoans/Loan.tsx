@@ -147,8 +147,7 @@ export default function EmprestimoRegister() {
         }),
       );
 
-      const response = await Promise.all(loanPromises);
-      console.log({ response });
+      await Promise.all(loanPromises);
 
       alert('Empréstimo realizado com sucesso');
     } catch (error) {

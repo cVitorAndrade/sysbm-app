@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Header from '../../../components/Header';
 import {
@@ -9,8 +10,26 @@ import {
   ListLoans,
   InputGroup,
 } from './styles';
+import { ILoanWithDetails } from '../../interfaces/ILoan';
+import { LoanService } from '../../services/loan.service';
 
 export function ListLoansPage() {
+  const [loans, setLoans] = useState<ILoanWithDetails[]>([]);
+
+  useEffect(() => {
+    const onGetLoans = async () => {
+      try {
+        const allLoans = await LoanService.getAllLoans();
+        console.log({ allLoans });
+        setLoans(allLoans);
+      } catch (error) {
+        console.log('ListLoansPage - onGetLoans: ', error);
+      }
+    };
+
+    onGetLoans();
+  }, []);
+
   return (
     <Container>
       <Header />
@@ -45,16 +64,34 @@ export function ListLoansPage() {
         </FilterSection>
 
         <ListLoans>
-          {Array.from({ length: 10 }, (_, index) => (
-            <LoanCard key={index}>
-              <strong>Nome do livro</strong>
-              <span className="status">Status</span>
-              <p>
-                Nome do locatário (Cliente): Nome do locatário - Matrícula/CPF: 12312312
-              </p>
-              <p>Aluguel: 01/01/2025 a 09/01/2025</p>
-            </LoanCard>
-          ))}
+          {loans.map(
+            ({
+              id,
+              bookTitle,
+              readerName,
+              readerCpf,
+              createdAt,
+              finalDate,
+              status,
+            }) => (
+              <LoanCard key={id}>
+                <strong>{bookTitle}</strong>
+                <span
+                  className="status"
+                  style={{ textTransform: 'capitalize' }}
+                >
+                  {status}
+                </span>
+                <p>
+                  Nome do leitor: {readerName} - CPF: {readerCpf}
+                </p>
+                <p>
+                  Aluguel: {new Date(createdAt).toLocaleDateString('pt-BR')} à{' '}
+                  {new Date(finalDate).toLocaleDateString('pt-BR')}
+                </p>
+              </LoanCard>
+            ),
+          )}
         </ListLoans>
       </Content>
     </Container>
