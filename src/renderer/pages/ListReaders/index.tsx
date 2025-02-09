@@ -47,6 +47,11 @@ export default function ListReaders() {
     setPage(value);
   };
 
+  const paginatedReaders = filteredReaders.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage,
+  );
+
   useEffect(() => {
     const onGetReaders = async () => {
       try {
@@ -69,7 +74,7 @@ export default function ListReaders() {
         <h2>Lista de Leitores</h2>
         <Scrollable>
           <ListWrapper>
-            {filteredReaders.map((reader) => (
+            {paginatedReaders.map((reader) => (
               <ListItem key={reader.id}>
                 <div className="info">
                   <strong>{reader.name}</strong>
