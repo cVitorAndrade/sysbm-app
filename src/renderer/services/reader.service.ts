@@ -11,4 +11,9 @@ export const ReaderService = {
     const { data } = await Api.get<IReader>(`/reader/cpf/${cpf}`);
     return data;
   },
+
+  async getAllReaders() {
+    const { data } = await Api.get<IReader[]>('/reader');
+    return data;
+  },
 };

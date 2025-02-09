@@ -20,7 +20,6 @@ export function ListLoansPage() {
     const onGetLoans = async () => {
       try {
         const allLoans = await LoanService.getAllLoans();
-        console.log({ allLoans });
         setLoans(allLoans);
       } catch (error) {
         console.log('ListLoansPage - onGetLoans: ', error);
