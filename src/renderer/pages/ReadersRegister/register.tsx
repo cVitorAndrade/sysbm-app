@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -32,6 +33,7 @@ const createUserSchema = z.object({
 });
 
 export default function ReaderRegister() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -108,7 +110,9 @@ export default function ReaderRegister() {
             <h3>Informações do leitor</h3>
             <FormRow>
               <FormField>
-                <label>Nome Completo</label>
+                <label>
+                  Nome Completo <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('name')}
@@ -117,7 +121,9 @@ export default function ReaderRegister() {
                 {errors.name && <span>{errors.name.message}</span>}
               </FormField>
               <FormField>
-                <label>Telefone</label>
+                <label>
+                  Telefone <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('phoneNumber')}
@@ -131,7 +137,9 @@ export default function ReaderRegister() {
 
             <FormRow>
               <FormField>
-                <label>CPF</label>
+                <label>
+                  CPF<span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('cpf')}
@@ -140,7 +148,9 @@ export default function ReaderRegister() {
                 {errors.cpf && <span>{errors.cpf.message}</span>}
               </FormField>
               <FormField>
-                <label>Email</label>
+                <label>
+                  Email <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="email"
                   {...register('email')}
@@ -152,7 +162,9 @@ export default function ReaderRegister() {
 
             <FormRow>
               <FormField>
-                <label>Data de Nascimento</label>
+                <label>
+                  Data de Nascimento <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input type="date" {...register('birtDate')} />
                 {errors.birtDate && <span>{errors.birtDate.message}</span>}
               </FormField>
@@ -164,7 +176,9 @@ export default function ReaderRegister() {
 
             <FormRow>
               <FormField>
-                <label>Rua</label>
+                <label>
+                  Rua <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('street')}
@@ -173,7 +187,9 @@ export default function ReaderRegister() {
                 {errors.street && <span>{errors.street.message}</span>}
               </FormField>
               <FormField>
-                <label>Número</label>
+                <label>
+                  Número <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input type="text" {...register('number')} placeholder="0000" />
                 {errors.number && <span>{errors.number.message}</span>}
               </FormField>
@@ -181,12 +197,16 @@ export default function ReaderRegister() {
 
             <FormRow>
               <FormField>
-                <label>Cidade</label>
+                <label>
+                  Cidade <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input type="text" {...register('city')} placeholder="Cidade" />
                 {errors.city && <span>{errors.city.message}</span>}
               </FormField>
               <FormField>
-                <label>CEP</label>
+                <label>
+                  CEP <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('postalCode')}
@@ -198,7 +218,9 @@ export default function ReaderRegister() {
 
             <FormRow>
               <FormField>
-                <label>Bairro</label>
+                <label>
+                  Bairro <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('neighborhood')}
@@ -211,7 +233,11 @@ export default function ReaderRegister() {
             </FormRow>
 
             <ButtonWrapper>
-              <Button type="button" title="CANCELAR" />
+              <Button
+                type="button"
+                title="CANCELAR"
+                onClick={() => navigate('/readers')}
+              />
               <Button type="submit" title="CADASTRAR" />
             </ButtonWrapper>
           </FormWrapper>

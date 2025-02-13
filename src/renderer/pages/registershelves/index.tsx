@@ -94,13 +94,15 @@ export default function BookshelvesRegister() {
         <Breadcrumb />
         <FormSection>
           <img src={fullLogo} alt="Logo SysBM" />
-          <h2>Cadastro de livros</h2>
+          <h2>Cadastro de estantes</h2>
           <FormWrapper
             onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}
           >
             <FormRow>
               <FormField>
-                <label htmlFor="bookshelf-name">Estante</label>
+                <label htmlFor="bookshelf-name">
+                  Estante <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   id="bookshelf-name"
                   type="text"
@@ -110,7 +112,9 @@ export default function BookshelvesRegister() {
                 {errors.name && <span>{errors.name.message}</span>}
               </FormField>
               <FormField>
-                <label htmlFor="bookshelf-color">Cor da estante</label>
+                <label htmlFor="bookshelf-color">
+                  Cor da estante <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   id="bookshelf-color"
                   type="text"
@@ -135,7 +139,8 @@ export default function BookshelvesRegister() {
               <FormRow key={shelf.id}>
                 <FormField>
                   <label htmlFor={`shelf-number-${index + 1}`}>
-                    Prateleira {index + 1}
+                    Prateleira {index + 1}{' '}
+                    <span style={{ color: 'red' }}>*</span>
                   </label>
                   <input
                     id={`shelf-number-${index + 1}`}
@@ -148,7 +153,9 @@ export default function BookshelvesRegister() {
                   )}
                 </FormField>
                 <FormField>
-                  <label htmlFor={`shelf-letter-${index + 1}`}>Letra</label>
+                  <label htmlFor={`shelf-letter-${index + 1}`}>
+                    Letra <span style={{ color: 'red' }}>*</span>
+                  </label>
                   <input
                     id={`shelf-letter-${index + 1}`}
                     type="text"
@@ -182,7 +189,7 @@ export default function BookshelvesRegister() {
               <Button
                 type="button"
                 title="CANCELAR"
-                onClick={() => navigate('/books')}
+                onClick={() => navigate('/bookshelves')}
               />
               <Button type="submit" title="CADASTRAR" />
             </ButtonWrapper>

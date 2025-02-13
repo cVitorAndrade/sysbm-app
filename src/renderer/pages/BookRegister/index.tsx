@@ -135,7 +135,9 @@ export default function BookRegister() {
           >
             <FormRow>
               <FormField>
-                <label>Número de registro</label>
+                <label>
+                  Número de registro <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('registrationNumber')} />
                 {errors.registrationNumber && (
                   <span>{errors.registrationNumber.message}</span>
@@ -150,12 +152,16 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Título</label>
+                <label>
+                  Título <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('title')} />
                 {errors.title && <span>{errors.title.message}</span>}
               </FormField>
               <FormField>
-                <label>Editora</label>
+                <label>
+                  Editora <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('publisher')} />
                 {errors.publisher && <span>{errors.publisher.message}</span>}
               </FormField>
@@ -163,12 +169,16 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Volume</label>
+                <label>
+                  Volume <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('volume')} />
                 {errors.volume && <span>{errors.volume.message}</span>}
               </FormField>
               <FormField>
-                <label>Gênero</label>
+                <label>
+                  Gênero <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('genre')} />
                 {errors.genre && <span>{errors.genre.message}</span>}
               </FormField>
@@ -176,12 +186,16 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Idioma</label>
+                <label>
+                  Idioma <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('language')} />
                 {errors.language && <span>{errors.language.message}</span>}
               </FormField>
               <FormField>
-                <label>ISBN</label>
+                <label>
+                  ISBN <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('isbn')} />
                 {errors.isbn && <span>{errors.isbn.message}</span>}
               </FormField>
@@ -189,14 +203,18 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Número de páginas</label>
+                <label>
+                  Número de páginas <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('numberOfPages')} />
                 {errors.numberOfPages && (
                   <span>{errors.numberOfPages.message}</span>
                 )}
               </FormField>
               <FormField>
-                <label>Quantidade de cópias</label>
+                <label>
+                  Quantidade de cópias <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('copies')} />
                 {errors.copies && <span>{errors.copies.message}</span>}
               </FormField>
@@ -204,7 +222,9 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Método de aquisição</label>
+                <label>
+                  Método de aquisição <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input {...register('acquisitionMethod')} />
                 {errors.acquisitionMethod && (
                   <span>{errors.acquisitionMethod.message}</span>
@@ -219,7 +239,9 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Ano de Publicação</label>
+                <label>
+                  Ano de Publicação <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input type="text" {...register('publicationYear')} />
                 {errors.publicationYear && (
                   <span>{errors.publicationYear.message}</span>
@@ -229,7 +251,9 @@ export default function BookRegister() {
 
             <FormRow>
               <FormField>
-                <label>Estante</label>
+                <label>
+                  Estante <span style={{ color: 'red' }}>*</span>
+                </label>
                 <select
                   {...register('bookShelfId')}
                   onChange={(e) => setValue('bookShelfId', e.target.value)}
@@ -246,7 +270,9 @@ export default function BookRegister() {
                 )}
               </FormField>
               <FormField>
-                <label>Prateleira</label>
+                <label>
+                  Prateleira <span style={{ color: 'red' }}>*</span>
+                </label>
                 <select
                   {...register('shelfId')}
                   onChange={(e) => setValue('shelfId', e.target.value)}

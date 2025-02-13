@@ -39,7 +39,7 @@ export default function Home() {
               <img src={bookshelfIcon} alt="ícone de livros" />
               <h2>Estantes</h2>
             </NavigationCard>
-            <NavigationCard to="/relatorio">
+            <NavigationCard to="/reports">
               <img src={monthlyReportsIcon} alt="ícone de livros" />
               <h2>Relatorio mensal</h2>
             </NavigationCard>

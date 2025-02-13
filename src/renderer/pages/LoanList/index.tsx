@@ -12,6 +12,7 @@ import {
 } from './styles';
 import { ILoanWithDetails } from '../../interfaces/ILoan';
 import { LoanService } from '../../services/loan.service';
+import { MarkLoanAsCompletedModal } from '../../../components/MarkLoanAsCompleted';
 
 export function ListLoansPage() {
   const [loans, setLoans] = useState<ILoanWithDetails[]>([]);
@@ -93,6 +94,8 @@ export function ListLoansPage() {
           )}
         </ListLoans>
       </Content>
+
+      {/* <MarkLoanAsCompletedModal /> */}
     </Container>
   );
 }

@@ -3,6 +3,7 @@ import { IoMdClose } from 'react-icons/io';
 import { z } from 'zod';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -44,19 +45,20 @@ const loanSchema = z.object({
   }),
   books: z.array(
     z.object({
-      isbn: z.string().min(10, 'ISBN inválido'),
+      isbn: z.string().min(10, 'ISBN inválido').nonempty('Campo obrigatório'),
       title: z.string().optional(),
       author: z.string().optional(),
       volume: z.string().optional(),
       publicationYear: z.string().optional(),
       notes: z.string().optional(),
-      bookConditionDelivery: z.string({ required_error: 'Campo obrigatório' }),
+      bookConditionDelivery: z.string().nonempty('Campo obrigatório'),
       bookId: z.string(),
     }),
   ),
 });
 
 export default function EmprestimoRegister() {
+  const navigate = useNavigate();
   const {
     register,
     control,
@@ -186,7 +188,9 @@ export default function EmprestimoRegister() {
           >
             <FormRow>
               <FormField>
-                <label>CPF</label>
+                <label>
+                  CPF <span style={{ color: 'red' }}>*</span>
+                </label>
                 <input
                   type="text"
                   {...register('user.cpf')}
@@ -249,7 +253,9 @@ export default function EmprestimoRegister() {
                       <IoMdClose size={20} color="red" />
                     </button>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <label>ISBN</label>
+                      <label>
+                        ISBN <span style={{ color: 'red' }}>*</span>
+                      </label>
                       <input
                         type="text"
                         {...register(`books.${index}.isbn`)}
@@ -313,7 +319,10 @@ export default function EmprestimoRegister() {
                 <FormRow>
                   <FormField />
                   <FormField style={{ flex: '2.09' }}>
-                    <label>Condição do livro no empréstimo</label>
+                    <label>
+                      Condição do livro no empréstimo{' '}
+                      <span style={{ color: 'red' }}>*</span>
+                    </label>
                     <textarea
                       {...register(`books.${index}.bookConditionDelivery`)}
                     />
@@ -349,7 +358,11 @@ export default function EmprestimoRegister() {
             )}
 
             <ButtonWrapper>
-              <Button title="CANCELAR" type="button" />
+              <Button
+                title="CANCELAR"
+                type="button"
+                onClick={() => navigate('/books')}
+              />
               <Button title="CONFIRMAR" type="submit" />
             </ButtonWrapper>
           </FormWrapper>
