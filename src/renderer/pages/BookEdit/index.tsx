@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Header from '../../../components/Header';
@@ -41,7 +41,11 @@ export default function BookEdit() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb />
+        <Breadcrumb>
+          <Link to="/books" style={{ color: 'white', fontWeight: '500' }}>
+            LIVROS
+          </Link>
+        </Breadcrumb>
         <FormSection>
           <h2>Editar Livro</h2>
           <FormWrapper>

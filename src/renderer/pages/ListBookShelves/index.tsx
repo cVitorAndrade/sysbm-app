@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Pagination } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { Container, Content, ListItem, ListWrapper, Actions } from './styles';
 import Breadcrumb from '../../../components/Breadcrumb';
 import SearchBar from '../../../components/SearchBar';
@@ -77,7 +78,11 @@ export default function ListBookshelves() {
     <Container>
       {/* <Header /> */}
       <Content>
-        <Breadcrumb style={{ color: 'black' }} />
+        <Breadcrumb style={{ color: 'black' }}>
+          <Link to="/bookshelves" style={{ color: 'black', fontWeight: '500' }}>
+            ESTANTES
+          </Link>
+        </Breadcrumb>
         <SearchBar onSearch={handleSearch} />
         <h2>Lista de estantes</h2>
         <Scrollable>

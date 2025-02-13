@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -126,7 +126,11 @@ export default function BookRegister() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb />
+        <Breadcrumb>
+          <Link to="/books" style={{ color: 'white', fontWeight: '500' }}>
+            LIVROS
+          </Link>
+        </Breadcrumb>
         <FormSection>
           <img src={fullLogo} alt="Logo SysBM" />
           <h2>Cadastro de livros</h2>

@@ -2,7 +2,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { Link, useLocation } from 'react-router-dom';
 import { Container } from './styles';
 
-export default function Breadcrumb({ style = {} }) {
+export default function Breadcrumb({ style = {}, children }) {
   const location = useLocation();
   const isRegisterPage = location.pathname === '/ListReaders';
 
@@ -13,6 +13,7 @@ export default function Breadcrumb({ style = {} }) {
         style={{ color: isRegisterPage ? '#000' : '#fff', ...style }}
       >
         HOME <IoIosArrowForward />
+        {children}
       </Link>
     </Container>
   );

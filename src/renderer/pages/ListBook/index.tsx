@@ -68,7 +68,11 @@ export default function ListBooks() {
   return (
     <Container>
       <Content>
-        <Breadcrumb style={{ color: 'black' }} />
+        <Breadcrumb style={{ color: 'black' }}>
+          <Link to="/books" style={{ color: 'black', fontWeight: '500' }}>
+            LIVROS
+          </Link>
+        </Breadcrumb>
         <SearchBar onSearch={handleSearch} />
         <h2>Acervo de livros</h2>
         <Scrollable height="65vh">

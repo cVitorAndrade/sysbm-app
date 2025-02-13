@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { z } from 'zod';
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -91,7 +91,11 @@ export default function BookshelvesRegister() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb />
+        <Breadcrumb style={{ color: 'white' }}>
+          <Link to="/bookshelves" style={{ color: 'white', fontWeight: '500' }}>
+            ESTANTES
+          </Link>
+        </Breadcrumb>
         <FormSection>
           <img src={fullLogo} alt="Logo SysBM" />
           <h2>Cadastro de estantes</h2>

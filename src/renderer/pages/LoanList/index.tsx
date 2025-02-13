@@ -34,7 +34,11 @@ export function ListLoansPage() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb />
+        <Breadcrumb style={{ color: 'white' }}>
+          <Link to="/bookshelves" style={{ color: 'white', fontWeight: '500' }}>
+            LIVROS
+          </Link>
+        </Breadcrumb>
 
         <FilterSection>
           <InputGroup>

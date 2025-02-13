@@ -69,7 +69,11 @@ export default function ListReaders() {
   return (
     <Container>
       <Content>
-        <Breadcrumb />
+        <Breadcrumb style={{ color: 'black' }}>
+          <Link to="/readers" style={{ color: 'black', fontWeight: '500' }}>
+            LEITORES
+          </Link>
+        </Breadcrumb>
         <SearchBar onSearch={handleSearch} />
         <h2>Lista de Leitores</h2>
         <Scrollable>

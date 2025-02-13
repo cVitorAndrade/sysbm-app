@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Header from '../../../components/Header';
@@ -41,7 +41,11 @@ export default function EditReaders() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb path={[]} />
+        <Breadcrumb style={{ color: 'white' }}>
+          <Link to="/readers" style={{ color: 'white', fontWeight: '500' }}>
+            LEITORES
+          </Link>
+        </Breadcrumb>
         <FormSection>
           <h2>Editar Leitor</h2>
           <FormWrapper>

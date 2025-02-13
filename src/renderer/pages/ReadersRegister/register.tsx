@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -100,7 +100,11 @@ export default function ReaderRegister() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb />
+        <Breadcrumb style={{ color: 'white' }}>
+          <Link to="/bookshelves" style={{ color: 'white', fontWeight: '500' }}>
+            LEITORES
+          </Link>
+        </Breadcrumb>
         <FormSection>
           <img src={fullLogo} alt="Logo SysBM" />
           <h2>Cadastro de Leitores</h2>

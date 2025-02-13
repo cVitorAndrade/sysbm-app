@@ -3,7 +3,7 @@ import { IoMdClose } from 'react-icons/io';
 import { z } from 'zod';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -179,7 +179,11 @@ export default function EmprestimoRegister() {
     <Container>
       <Header />
       <Content>
-        <Breadcrumb />
+        <Breadcrumb>
+          <Link to="/books" style={{ color: 'white', fontWeight: '500' }}>
+            LIVROS
+          </Link>
+        </Breadcrumb>
         <FormSection>
           <img src={fullLogo} alt="Logo SysBM" />
           <h2>Cadastro de Empréstimo</h2>
