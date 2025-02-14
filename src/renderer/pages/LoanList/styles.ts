@@ -88,4 +88,11 @@ export const LoanCard = styled.div`
     font-size: 1.2rem;
     color: #666;
   }
+
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.75);
+  }
 `;

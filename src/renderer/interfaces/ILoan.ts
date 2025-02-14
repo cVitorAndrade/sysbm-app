@@ -33,3 +33,8 @@ export interface ILoanWithDetails extends ILoan {
   bookTitle: string;
   readerCpf: string;
 }
+
+export interface IMarkLoanAsComplete {
+  status: LoanStatus | null;
+  bookConditionReturn: string;
+}

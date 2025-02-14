@@ -12,10 +12,28 @@ import {
 } from './styles';
 import { ILoanWithDetails } from '../../interfaces/ILoan';
 import { LoanService } from '../../services/loan.service';
-import { MarkLoanAsCompletedModal } from '../../../components/MarkLoanAsCompleted';
+import { ManageLoanModal } from '../../../components/ManageLoanModal';
+
+const statusTag = {
+  active: 'Ativo',
+  lost: 'Livro perdido',
+  returnedOnTime: 'Devolvido no prazo',
+  returnedLate: 'Devolvido com atraso',
+  overdue: 'Livro Atrasado',
+  renewed: 'Livro renovado',
+};
 
 export function ListLoansPage() {
   const [loans, setLoans] = useState<ILoanWithDetails[]>([]);
+
+  const [selectedLoan, setSelectedLoan] = useState<ILoanWithDetails>();
+  const [showLoanModal, setShowLoanModal] = useState<boolean>(false);
+
+  const onCloseManageLoanModal = () => setShowLoanModal(false);
+  const onOpenManageLoanModal = (loan: ILoanWithDetails) => {
+    setSelectedLoan(loan);
+    setShowLoanModal(true);
+  };
 
   useEffect(() => {
     const onGetLoans = async () => {
@@ -35,7 +53,7 @@ export function ListLoansPage() {
       <Header />
       <Content>
         <Breadcrumb style={{ color: 'white' }}>
-          <Link to="/bookshelves" style={{ color: 'white', fontWeight: '500' }}>
+          <Link to="/books" style={{ color: 'white', fontWeight: '500' }}>
             LIVROS
           </Link>
         </Breadcrumb>
@@ -77,14 +95,29 @@ export function ListLoansPage() {
               createdAt,
               finalDate,
               status,
+              ...rest
             }) => (
-              <LoanCard key={id}>
+              <LoanCard
+                key={id}
+                onClick={() => {
+                  onOpenManageLoanModal({
+                    id,
+                    bookTitle,
+                    readerName,
+                    readerCpf,
+                    createdAt,
+                    finalDate,
+                    status,
+                    ...rest,
+                  });
+                }}
+              >
                 <strong>{bookTitle}</strong>
                 <span
                   className="status"
                   style={{ textTransform: 'capitalize' }}
                 >
-                  {status}
+                  {statusTag[status]}
                 </span>
                 <p>
                   Nome do leitor: {readerName} - CPF: {readerCpf}
@@ -99,7 +132,9 @@ export function ListLoansPage() {
         </ListLoans>
       </Content>
 
-      {/* <MarkLoanAsCompletedModal /> */}
+      {showLoanModal && (
+        <ManageLoanModal loan={selectedLoan} onClose={onCloseManageLoanModal} />
+      )}
     </Container>
   );
 }

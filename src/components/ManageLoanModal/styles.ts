@@ -4,15 +4,18 @@ export const Container = styled.div`
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Content = styled.div`
   width: min(90%, 80rem);
-  padding: 2rem;
+  padding: 4rem 2rem 2rem;
   border-radius: 1rem;
   background-color: #eeeeee;
+  position: relative;
 `;
-
 
 export const FormWrapper = styled.form`
   display: flex;
@@ -35,13 +38,15 @@ export const FormField = styled.div`
   flex-direction: column;
   flex: 1;
 
-  > label {
+  > label,
+  > div > label {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
     color: #555;
   }
 
-  > input {
+  > input,
+  > div > input {
     padding: 0.8rem;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
@@ -66,4 +71,10 @@ export const Select = styled.select`
     outline: none;
     border-color: #007bff;
   }
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: end;
+  gap: 0.8rem;
 `;
