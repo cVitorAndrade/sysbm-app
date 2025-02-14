@@ -29,22 +29,26 @@ export function ListLoansPage() {
   const [selectedLoan, setSelectedLoan] = useState<ILoanWithDetails>();
   const [showLoanModal, setShowLoanModal] = useState<boolean>(false);
 
-  const onCloseManageLoanModal = () => setShowLoanModal(false);
+  const onGetLoans = async () => {
+    try {
+      const allLoans = await LoanService.getAllLoans();
+      setLoans(allLoans);
+    } catch (error) {
+      console.log('ListLoansPage - onGetLoans: ', error);
+    }
+  };
+
+  const onCloseManageLoanModal = async () => {
+    setShowLoanModal(false);
+    await onGetLoans();
+  };
+
   const onOpenManageLoanModal = (loan: ILoanWithDetails) => {
     setSelectedLoan(loan);
     setShowLoanModal(true);
   };
 
   useEffect(() => {
-    const onGetLoans = async () => {
-      try {
-        const allLoans = await LoanService.getAllLoans();
-        setLoans(allLoans);
-      } catch (error) {
-        console.log('ListLoansPage - onGetLoans: ', error);
-      }
-    };
-
     onGetLoans();
   }, []);
 

@@ -23,7 +23,15 @@ export const LoanService = {
   },
 
   async markLoanAsComplete(id: string, payload: IMarkLoanAsComplete) {
-    const { data } = await Api.patch(`loans/complete/${id}`, payload);
+    const { data } = await Api.patch<ILoanWithDetails>(
+      `loans/complete/${id}`,
+      payload,
+    );
+    return data;
+  },
+
+  async renewLoan(id: string) {
+    const { data } = await Api.patch<ILoanWithDetails>(`loans/renew/${id}`);
     return data;
   },
 };

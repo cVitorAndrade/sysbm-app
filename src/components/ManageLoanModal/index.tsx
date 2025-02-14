@@ -49,6 +49,19 @@ export function ManageLoanModal({ loan, onClose }: ManageLoanModalProps) {
       });
 
       alert('Empréstimo finalizado com sucesso');
+      onClose();
+    } catch (error) {
+      console.log('ManageLoanModal - onSubmit: ', error);
+    }
+  };
+
+  const onRenewLoan = async () => {
+    try {
+      if (!loan) return;
+
+      await LoanService.renewLoan(loan.id);
+      alert('Empréstimo renovado com sucesso');
+      onClose();
     } catch (error) {
       console.log('ManageLoanModal - onSubmit: ', error);
     }
@@ -252,6 +265,7 @@ export function ManageLoanModal({ loan, onClose }: ManageLoanModalProps) {
                   title="Renovar empréstimo"
                   style={{ background: '#FBB02D' }}
                   disabled={lostBook || allTimesRenewed >= 3}
+                  onClick={onRenewLoan}
                 />
                 <Button
                   onClick={() => {}}
