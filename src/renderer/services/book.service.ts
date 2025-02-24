@@ -1,3 +1,4 @@
+import { string } from 'zod';
 import { IBook, ICreateBook } from '../interfaces/IBook';
 import { Api } from '../provider';
 
@@ -15,5 +16,9 @@ export const BookService = {
   async getBookByIsbn(isbn: string) {
     const { data } = await Api.get<IBook>(`/book/isbn/${isbn}`);
     return data;
+  },
+
+  async deleteBook(id: string) {
+    await Api.delete(`/book/${id}`);
   },
 };

@@ -8,25 +8,39 @@ import SearchBar from '../../../components/SearchBar';
 import Scrollable from '../../../components/ScrollLabs';
 import { IBook } from '../../interfaces/IBook';
 import { BookService } from '../../services/book.service';
+import { DeleteItemModal } from '../../../components/DeleteItemModal';
+import { useToast } from '../../hooks/useToast';
 
 export default function ListBooks() {
+  const { successMessage, errorMessage } = useToast();
   const [books, setBooks] = useState<IBook[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<IBook[]>([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 8;
 
-  useEffect(() => {
-    const onGetBooks = async () => {
-      try {
-        const allBooks = await BookService.getAllBooks();
-        setBooks(allBooks);
-        setFilteredBooks(allBooks);
-      } catch (error) {
-        console.log('ListBooks - onGetBooks: ', error);
-      }
-    };
-    onGetBooks();
-  }, []);
+  const [selectedBookIdToDelete, setSelectedBookIdToDelete] =
+    useState<string>('');
+  const [showDeleteBookModal, setShowDeleteBookModal] =
+    useState<boolean>(false);
+
+  const onOpenDeleteBookModal = (id: string) => {
+    setSelectedBookIdToDelete(id);
+    setShowDeleteBookModal(true);
+  };
+
+  const onCloseDeleteBookModal = () => {
+    setShowDeleteBookModal(false);
+  };
+
+  const onGetBooks = async () => {
+    try {
+      const allBooks = await BookService.getAllBooks();
+      setBooks(allBooks);
+      setFilteredBooks(allBooks);
+    } catch (error) {
+      console.log('ListBooks - onGetBooks: ', error);
+    }
+  };
 
   const handleSearch = (query: string) => {
     const normalizedQuery = query.toLowerCase().trim();
@@ -65,6 +79,23 @@ export default function ListBooks() {
     page * itemsPerPage,
   );
 
+  const onDeleteBook = async () => {
+    try {
+      await BookService.deleteBook(selectedBookIdToDelete);
+      successMessage({ message: 'O livro foi excluído com sucesso' });
+      await onGetBooks();
+    } catch (error) {
+      errorMessage({
+        message: 'Ocorreu um erro ao tentar excluir. Tente novamente.',
+      });
+      console.log('ListBooks - onDeleteBook: ', error);
+    }
+  };
+
+  useEffect(() => {
+    onGetBooks();
+  }, []);
+
   return (
     <Container>
       <Content>
@@ -77,28 +108,34 @@ export default function ListBooks() {
         <h2>Acervo de livros</h2>
         <Scrollable height="65vh">
           <ListWrapper>
-            {paginatedBooks.map((book, index) => (
-              <ListItem key={book.id}>
-                <div className="info">
-                  <strong>{book.title}</strong>
-                  <p>ISBN: {book.isbn}</p>
-                  <p>Autor: {book.author}</p>
-                  <p>Editora: {book.publisher}</p>
-                  <p>Total de exemplares: {book.copies}</p>
-                  <p>Disponíveis: {book.available}</p>
-                </div>
-                <Actions>
-                  <Link to="/book/edit">
-                    <button type="button" className="edit">
-                      <FaEdit size={18} />
+            {paginatedBooks
+              .filter(({ status }) => status !== 'disabled')
+              .map((book, index) => (
+                <ListItem key={book.id}>
+                  <div className="info">
+                    <strong>{book.title}</strong>
+                    <p>ISBN: {book.isbn}</p>
+                    <p>Autor: {book.author}</p>
+                    <p>Editora: {book.publisher}</p>
+                    <p>Total de exemplares: {book.copies}</p>
+                    <p>Disponíveis: {book.available}</p>
+                  </div>
+                  <Actions>
+                    <Link to="/book/edit">
+                      <button type="button" className="edit">
+                        <FaEdit size={18} />
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => onOpenDeleteBookModal(book.id)}
+                      type="button"
+                      className="delete"
+                    >
+                      <FaTrash size={18} />
                     </button>
-                  </Link>
-                  <button type="button" className="delete">
-                    <FaTrash size={18} />
-                  </button>
-                </Actions>
-              </ListItem>
-            ))}
+                  </Actions>
+                </ListItem>
+              ))}
           </ListWrapper>
         </Scrollable>
         <div
@@ -115,6 +152,15 @@ export default function ListBooks() {
           />
         </div>
       </Content>
+
+      {showDeleteBookModal && (
+        <DeleteItemModal
+          title="Deseja excluir esse livro"
+          description="Você está prestes a deletar esse livro. Isso acarretará na sua remoção do sistema. O mesmo não poderá ser empréstado. Deseja continuar?"
+          onClose={onCloseDeleteBookModal}
+          onConfirm={onDeleteBook}
+        />
+      )}
     </Container>
   );
 }

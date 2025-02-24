@@ -101,7 +101,7 @@ export default function ReaderRegister() {
       <Header />
       <Content>
         <Breadcrumb style={{ color: 'white' }}>
-          <Link to="/bookshelves" style={{ color: 'white', fontWeight: '500' }}>
+          <Link to="/readers" style={{ color: 'white', fontWeight: '500' }}>
             LEITORES
           </Link>
         </Breadcrumb>

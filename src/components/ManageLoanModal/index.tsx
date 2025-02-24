@@ -14,6 +14,7 @@ import {
 import Button from '../Button';
 import { ILoanWithDetails } from '../../renderer/interfaces/ILoan';
 import { LoanService } from '../../renderer/services/loan.service';
+import { useToast } from '../../renderer/hooks/useToast';
 
 interface ManageLoanModalProps extends HTMLAttributes<HTMLDivElement> {
   loan: ILoanWithDetails | undefined;
@@ -21,6 +22,7 @@ interface ManageLoanModalProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export function ManageLoanModal({ loan, onClose }: ManageLoanModalProps) {
+  const { errorMessage, successMessage } = useToast();
   const markLoanAsCompleteSchema = z.object({
     readerName: z.string(),
     bookConditionReturn: z.string().nonempty('Campo obrigatório'),
@@ -48,10 +50,14 @@ export function ManageLoanModal({ loan, onClose }: ManageLoanModalProps) {
         status: isLost ? 'lost' : null,
       });
 
-      alert('Empréstimo finalizado com sucesso');
+      successMessage({ message: 'Empréstimo finalizado com sucesso' });
       onClose();
     } catch (error) {
       console.log('ManageLoanModal - onSubmit: ', error);
+      errorMessage({
+        message:
+          'Ocorreu um erro ao tentar finalizar empréstimo. Tente novamente mais tarde.',
+      });
     }
   };
 
@@ -60,10 +66,14 @@ export function ManageLoanModal({ loan, onClose }: ManageLoanModalProps) {
       if (!loan) return;
 
       await LoanService.renewLoan(loan.id);
-      alert('Empréstimo renovado com sucesso');
+      successMessage({ message: 'Empréstimo renovado com sucesso' });
       onClose();
     } catch (error) {
       console.log('ManageLoanModal - onSubmit: ', error);
+      errorMessage({
+        message:
+          'Ocorreu um erro ao tentar renovar empréstimo. Tente novamente mais tarde.',
+      });
     }
   };
 
