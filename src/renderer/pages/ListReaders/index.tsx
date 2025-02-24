@@ -8,13 +8,31 @@ import SearchBar from '../../../components/SearchBar';
 import Scrollable from '../../../components/ScrollLabs';
 import { IReader } from '../../interfaces/IReader';
 import { ReaderService } from '../../services/reader.service';
+import { DeleteItemModal } from '../../../components/DeleteItemModal';
+import { useToast } from '../../hooks/useToast';
 
 export default function ListReaders() {
+  const { successMessage, errorMessage } = useToast();
+
   const [readers, setReaders] = useState<IReader[]>([]);
 
   const [filteredReaders, setFilteredReaders] = useState<IReader[]>([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 8;
+
+  const [selectedReaderIdToDelete, setSelectedReaderIdToDelete] =
+    useState<string>('');
+  const [showDeleteReaderModal, setShowDeleteReaderModal] =
+    useState<boolean>(false);
+
+  const onOpenDeleteReaderModal = (id: string) => {
+    setSelectedReaderIdToDelete(id);
+    setShowDeleteReaderModal(true);
+  };
+
+  const onCloseDeleteReaderModal = () => {
+    setShowDeleteReaderModal(false);
+  };
 
   const handleSearch = (query: string) => {
     const normalizedQuery = query.toLowerCase().trim();
@@ -52,19 +70,33 @@ export default function ListReaders() {
     page * itemsPerPage,
   );
 
-  useEffect(() => {
-    const onGetReaders = async () => {
-      try {
-        const allReaders = await ReaderService.getAllReaders();
-        setReaders(allReaders);
-        setFilteredReaders(allReaders);
-      } catch (error) {
-        console.log('ListReaders - onGetReaders: ', error);
-      }
-    };
+  const onGetReaders = async () => {
+    try {
+      const allReaders = await ReaderService.getAllReaders();
+      setReaders(allReaders);
+      setFilteredReaders(allReaders);
+      console.log({ readers });
+    } catch (error) {
+      console.log('ListReaders - onGetReaders: ', error);
+    }
+  };
 
+  useEffect(() => {
     onGetReaders();
   }, []);
+
+  const onDeleteReader = async () => {
+    try {
+      await ReaderService.deleteReaderById(selectedReaderIdToDelete);
+      successMessage({ message: 'O leitor foi excluído com sucesso' });
+      await onGetReaders();
+    } catch (error) {
+      errorMessage({
+        message: 'Ocorreu um erro ao tentar excluir. Tente novamente.',
+      });
+      console.log('ListBooks - onDeleteBook: ', error);
+    }
+  };
 
   return (
     <Container>
@@ -78,26 +110,32 @@ export default function ListReaders() {
         <h2>Lista de Leitores</h2>
         <Scrollable>
           <ListWrapper>
-            {paginatedReaders.map((reader) => (
-              <ListItem key={reader.id}>
-                <div className="info">
-                  <strong>{reader.name}</strong>
-                  <p>Email: {reader.email}</p>
-                  <p>Telefone: {reader.phoneNumber}</p>
-                  <p>CPF: {reader.cpf}</p>
-                </div>
-                <Actions>
-                  <Link to="/ReadersEdit">
-                    <button className="edit" type="button">
-                      <FaEdit size={18} />
+            {paginatedReaders
+              .filter(({ status }) => status !== 'disabled')
+              .map((reader) => (
+                <ListItem key={reader.id}>
+                  <div className="info">
+                    <strong>{reader.name}</strong>
+                    <p>Email: {reader.email}</p>
+                    <p>Telefone: {reader.phoneNumber}</p>
+                    <p>CPF: {reader.cpf}</p>
+                  </div>
+                  <Actions>
+                    <Link to="/ReadersEdit">
+                      <button className="edit" type="button">
+                        <FaEdit size={18} />
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => onOpenDeleteReaderModal(reader.id)}
+                      className="delete"
+                      type="button"
+                    >
+                      <FaTrash size={18} />
                     </button>
-                  </Link>
-                  <button className="delete" type="button">
-                    <FaTrash size={18} />
-                  </button>
-                </Actions>
-              </ListItem>
-            ))}
+                  </Actions>
+                </ListItem>
+              ))}
           </ListWrapper>
           <div
             style={{
@@ -118,6 +156,15 @@ export default function ListReaders() {
           </div>
         </Scrollable>
       </Content>
+
+      {showDeleteReaderModal && (
+        <DeleteItemModal
+          title="Deseja excluir esse leitor"
+          description="Você está prestes a deletar esse leitor. Isso acarretará na sua remoção do sistema. Não poderão ser feitos empréstimos ao mesmo. Deseja continuar?"
+          onClose={onCloseDeleteReaderModal}
+          onConfirm={onDeleteReader}
+        />
+      )}
     </Container>
   );
 }

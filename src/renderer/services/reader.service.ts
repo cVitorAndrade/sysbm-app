@@ -16,4 +16,8 @@ export const ReaderService = {
     const { data } = await Api.get<IReader[]>('/reader');
     return data;
   },
+
+  async deleteReaderById(id: string) {
+    await Api.delete<IReader>(`/reader/${id}`);
+  },
 };
