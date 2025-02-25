@@ -56,7 +56,7 @@ Por fim, inicie o servidor em modo de desenvolvimento, usando o comando:
 
 Entre na pasta do front-end, usando o comando:
 
-    - "cd frontend/my-app"
+    - "cd frontend"
 
 Instale as dependências do Front-end, usando o comando:
 
