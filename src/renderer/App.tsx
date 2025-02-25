@@ -26,7 +26,7 @@ import BookEdit from './pages/BookEdit';
 import { useAuthStore } from './pages/store/authStore';
 import BookshelvesRegister from './pages/registershelves';
 import { ListLoansPage } from './pages/LoanList';
-import { Reports } from './pages/Reports';
+//import Reports from './pages/Reports';
 
 export default function App() {
   const { userIsLogged } = useAuthStore();
@@ -90,7 +90,7 @@ export default function App() {
             path="/relatorio"
             element={userIsLogged ? <Relatorio /> : <Navigate to="/login" />}
           />
-          {/* Nova rota para Gerar Relatório */}
+
           <Route
             path="/gerar-relatorio"
             element={
@@ -112,17 +112,11 @@ export default function App() {
             element={userIsLogged ? <BookEdit /> : <Navigate to="/login" />}
           />
 
-          {/* Nova Rota: Gerenciar Empréstimos */}
           <Route
             path="/loan/manage"
             element={
               userIsLogged ? <ListLoansPage /> : <Navigate to="/login" />
             }
-          />
-
-          <Route
-            path="/reports"
-            element={userIsLogged ? <Reports /> : <Navigate to="/login" />}
           />
         </Routes>
       </Router>

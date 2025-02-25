@@ -79,10 +79,7 @@ export default function ModalRelatorio({ isOpen, onClose }: ModalProps) {
                 Nenhum...
               </option>
               <option value="tema2">Livros mais lidos</option>
-              <option value="tema3">Livros devolvidos</option>
-              <option value="tema4">Livros renovados</option>
               <option value="tema5">Gêneros mais lidos</option>
-              <option value="tema6">Livros atrasados</option>
             </select>
 
             <ModalFooter>

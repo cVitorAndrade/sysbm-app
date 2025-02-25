@@ -15,11 +15,35 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 4rem;
-  background-color: #eeeeee;
 `;
 
-export const ReportSection = styled.div`
+export const NavigationSection = styled.main`
+  width: min(40rem, 90%);
+  background-color: #eeeeee;
+  padding: 3rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  > img {
+    width: 40rem;
+  }
+`;
+
+export const NavigationWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   width: 100%;
-  height: 100%;
-  background-color: green;
+
+  > a {
+    width: 100%;
+
+    > button {
+      cursor: pointer;
+      width: 100%;
+    }
+  }
 `;

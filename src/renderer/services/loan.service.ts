@@ -34,4 +34,17 @@ export const LoanService = {
     const { data } = await Api.patch<ILoanWithDetails>(`loans/renew/${id}`);
     return data;
   },
+
+  // eslint-disable-next-line no-dupe-keys
+  async getLoansBetweenDates(
+    startDate: string,
+    endDate: string,
+    dateField: string,
+  ) {
+    const { data } = await Api.get<ILoanWithDetails[]>(
+      `/loans?startDate=${startDate}&endDate=${endDate}&dateField=${dateField}`,
+    );
+    return data;
+  },
+
 };

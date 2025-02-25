@@ -1,62 +1,153 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  padding: 15px 30px;
-  background-color: #f9f9f9;
-  min-height: 50vh;
+/** Container geral da página, com fundo suave */
+export const PageWrapper = styled.div`
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f0f2f5 0%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const Title = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 30px;
+/** Limita a largura máxima e centraliza o conteúdo */
+export const MainContent = styled.div`
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0 20px;
 `;
 
-export const Section = styled.div`
-  margin-bottom: 30px;
+/** Card principal, para agrupar título, breadcrumb e dados */
+export const Card = styled.div`
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
 
-  h3 {
-    font-size: 10px;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 15px;
+/** Cabeçalho do relatório (título, período) */
+export const CardHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: #333;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
   }
 `;
 
-export const ChartWrapper = styled.div`
+/** Envolve a tabela e o gráfico, lado a lado */
+export const ContentWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
+`;
+
+/** Estilos para a tabela */
+export const TableContainer = styled.div`
+  flex: 1;
   background: #fff;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 15px;
-  text-align: center;
-`;
+  padding: 16px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 
-export const ListWrapper = styled.div`
-  background: #f1f1f1;
-  border-radius: 8px;
-  padding: 15px;
-`;
+  h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #444;
+    text-align: center;
+  }
 
-export const BookList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  table {
+    width: 100%;
+    border-collapse: collapse;
 
-  li {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 5px;
+    thead {
+      tr {
+        background-color: #f5f5f5;
+      }
+    }
 
-    &:last-child {
-      margin-bottom: 0;
+    th, td {
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #555;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    tr:hover {
+      background: #fafafa;
     }
   }
+
+  p {
+    font-size: 0.9rem;
+    color: #777;
+    text-align: center;
+  }
 `;
-export const Content = styled.div`
-  padding: 20px;
+
+/** Estilos para o gráfico */
+export const ChartContainer = styled.div`
+  width: 420px;
+  min-width: 300px;
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #444;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+`;
+
+/** Área de seleção de período/tema */
+export const FiltersRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+
+  label {
+    font-weight: 500;
+    color: #555;
+    margin-right: 4px;
+  }
+
+  input[type="date"],
+  select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    min-width: 150px;
+  }
 `;

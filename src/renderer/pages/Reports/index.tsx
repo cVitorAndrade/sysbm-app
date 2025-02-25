@@ -1,17 +1,33 @@
+import { Link } from 'react-router-dom';
+import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
-import Header from '../../../components/Header';
-import { Container, Content, ReportSection } from './styles';
 import Button from '../../../components/Button';
 
-export function Reports() {
+import Header from '../../../components/Header';
+import {
+  Container,
+  Content,
+  NavigationSection,
+  NavigationWrapper,
+} from './styles';
+
+export default function RelatorioMensal() {
   return (
     <Container>
       <Header />
       <Content>
-        <Breadcrumb style={{ color: 'black' }} />
-        <ReportSection>
-          
-        </ReportSection>
+        <Breadcrumb />
+        <NavigationSection>
+          <img src={fullLogo} alt="SysBM Logo" />
+          <NavigationWrapper>
+            <Link to="/GerarRelatorio">
+              <Button title="GERAR RELATORIO" />
+            </Link>
+            <Link to="/reports">
+              <Button title="HISTORICO DE RELATORIOS" />
+            </Link>
+          </NavigationWrapper>
+        </NavigationSection>
       </Content>
     </Container>
   );
