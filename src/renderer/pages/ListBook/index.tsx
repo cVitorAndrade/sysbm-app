@@ -121,7 +121,7 @@ export default function ListBooks() {
                     <p>Disponíveis: {book.available}</p>
                   </div>
                   <Actions>
-                    <Link to="/book/edit">
+                    <Link to={`/book/edit?isbn=${book.isbn}`}>
                       <button type="button" className="edit">
                         <FaEdit size={18} />
                       </button>

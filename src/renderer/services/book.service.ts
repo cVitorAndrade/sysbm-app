@@ -1,5 +1,4 @@
-import { string } from 'zod';
-import { IBook, ICreateBook } from '../interfaces/IBook';
+import { IBook, ICreateBook, IUpdateBook } from '../interfaces/IBook';
 import { Api } from '../provider';
 
 export const BookService = {
@@ -20,5 +19,10 @@ export const BookService = {
 
   async deleteBook(id: string) {
     await Api.delete(`/book/${id}`);
+  },
+
+  async updateBook(id: string, paylaod: IUpdateBook) {
+    const { data } = await Api.patch(`/book/${id}`, paylaod);
+    return data;
   },
 };

@@ -21,3 +21,7 @@ export interface IBook extends ICreateBook {
   id: string;
   createdAt: Date;
 }
+
+export interface IUpdateBook extends Partial<IBook> {
+  bookId?: string;
+}

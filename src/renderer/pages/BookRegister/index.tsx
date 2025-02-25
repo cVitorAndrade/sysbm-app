@@ -35,10 +35,9 @@ const createBookSchema = z.object({
   title: z.string().nonempty('Campo obrigatório'),
   genre: z.string().nonempty('Campo obrigatório'),
   language: z.string().nonempty('Campo obrigatório'),
-  // available: z.string().nonempty('Campo obrigatório'),
   isbn: z.string().nonempty('Campo obrigatório'),
   numberOfPages: z.string().nonempty('Campo obrigatório'),
-  publicationYear: z.string().nonempty('Campo obrigatório'), // Novo campo
+  publicationYear: z.string().nonempty('Campo obrigatório'),
 });
 
 export default function BookRegister() {
