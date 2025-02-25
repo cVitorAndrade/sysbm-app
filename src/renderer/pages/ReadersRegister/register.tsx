@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import fullLogo from '../../../../assets/full-logo.png';
 import Breadcrumb from '../../../components/Breadcrumb';
 import Button from '../../../components/Button';
@@ -34,9 +35,14 @@ const createUserSchema = z.object({
 
 export default function ReaderRegister() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const [userIdGlobal, setUserIdGlobal] = useState<string>('');
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm({

@@ -97,6 +97,7 @@ export default function ListReaders() {
       console.log('ListBooks - onDeleteBook: ', error);
     }
   };
+  
 
   return (
     <Container>
@@ -121,7 +122,7 @@ export default function ListReaders() {
                     <p>CPF: {reader.cpf}</p>
                   </div>
                   <Actions>
-                    <Link to="/ReadersEdit">
+                    <Link to={`/ReadersEdit?cpf=${reader.cpf}`}>
                       <button className="edit" type="button">
                         <FaEdit size={18} />
                       </button>

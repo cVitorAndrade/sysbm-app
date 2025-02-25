@@ -1,4 +1,4 @@
-import { ICreateReader, IReader } from '../interfaces/IReader';
+import { ICreateReader, IReader, IUpdateReader } from '../interfaces/IReader';
 import { Api } from '../provider';
 
 export const ReaderService = {
@@ -19,5 +19,9 @@ export const ReaderService = {
 
   async deleteReaderById(id: string) {
     await Api.delete<IReader>(`/reader/${id}`);
+  },
+
+  async update(id: string, payload: IUpdateReader) {
+    await Api.patch(`/reader/${id}`, payload);
   },
 };

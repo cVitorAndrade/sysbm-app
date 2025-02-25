@@ -140,7 +140,6 @@ export default function BookEdit() {
         if (!bookIsbnParam) return;
 
         const book = await BookService.getBookByIsbn(bookIsbnParam);
-        console.log({ book });
         const {
           acquisitionMethod,
           author,

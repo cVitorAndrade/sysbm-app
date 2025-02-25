@@ -12,3 +12,7 @@ export interface IReader extends ICreateReader {
   id: string;
   createdAt: string;
 }
+
+export interface IUpdateReader extends Partial<IReader> {
+  readerId: string;
+}
