@@ -1,0 +1,98 @@
+import { Book as BookRaw } from '@prisma/client';
+import { Book } from 'src/modules/book/entities/book';
+
+export class PrismaBookMapper {
+  static toPrisma({
+    acquisitionMethod,
+    author,
+    available,
+    bookShelfId,
+    copies,
+    createdAt,
+    genre,
+    id,
+    status,
+    isbn,
+    language,
+    librarianId,
+    notes,
+    numberOfPages,
+    publicationYear,
+    publisher,
+    registrationNumber,
+    shelfId,
+    title,
+    volume,
+  }: Book): BookRaw {
+    return {
+      acquisitionMethod,
+      author,
+      available,
+      bookShelfId,
+      copies,
+      createdAt,
+      genre,
+      id,
+      isbn,
+      language,
+      librarianId,
+      notes,
+      numberOfPages,
+      publicationYear,
+      publisher,
+      registrationNumber,
+      shelfId,
+      title,
+      volume,
+      status,
+    };
+  }
+
+  static toDomain({
+    id,
+    acquisitionMethod,
+    author,
+    available,
+    bookShelfId,
+    copies,
+    createdAt,
+    genre,
+    isbn,
+    language,
+    librarianId,
+    notes,
+    numberOfPages,
+    publicationYear,
+    publisher,
+    registrationNumber,
+    shelfId,
+    title,
+    volume,
+    status,
+  }: BookRaw): Book {
+    return new Book(
+      {
+        acquisitionMethod,
+        author,
+        available,
+        bookShelfId,
+        copies,
+        genre,
+        isbn,
+        language,
+        librarianId,
+        numberOfPages,
+        publicationYear,
+        publisher,
+        registrationNumber,
+        shelfId,
+        title,
+        volume,
+        createdAt,
+        notes,
+        status
+      },
+      id,
+    );
+  }
+}
