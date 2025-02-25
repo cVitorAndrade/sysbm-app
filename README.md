@@ -33,7 +33,7 @@ Certifique-se de que as ferramentas abaixo estão instaladas no seu ambiente:
 
 Com o repositório já clonado, deve-se entrar na pasta do backend, usando o comando:
 
-    - "cd backend"
+    - "cd server"
 
 Instale as dependências do projeto, usando o comando:
 
