@@ -1,6 +1,16 @@
 #  SYSBM
 
 Bem-vindo ao **SysBM, sistema  de gerenciamento de empréstimo e acervo da Biblioteca Municipal de Milhã**
+Sistema da cadeira de Projeto Integrado em Engenharia de Software I.
+
+##  Equipe
+
+- **Carlos Vitor Andrade Macêdo
+- **Francisco Rafael Lobo Pinho
+- **Paulo Vitor Pinheiro da Silva
+- **Thamires Taboza da Silva
+
+---
 
 ##  Tecnologias Utilizadas
 
