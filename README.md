@@ -1,8 +1,8 @@
-# 📚 SYSBM
+#  SYSBM
 
 Bem-vindo ao **SysBM, sistema  de gerenciamento de empréstimo e acervo da Biblioteca Municipal de Milhã**
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Front-end**: Electron.js com React e TypeScript
 - **Back-end**: NestJS, Prisma ORM e TypeScript
@@ -11,7 +11,7 @@ Bem-vindo ao **SysBM, sistema  de gerenciamento de empréstimo e acervo da Bibli
 
 ---
 
-## 🚀 Funcionalidades Principais
+## Funcionalidades Principais
 
 - Cadastro e Gerenciamento de empréstimos.
 - Cadastro e edição de livros, leitores e estantes.
@@ -20,7 +20,7 @@ Bem-vindo ao **SysBM, sistema  de gerenciamento de empréstimo e acervo da Bibli
 
 ---
 
-## 🧰 Configuração do Projeto
+## Configuração do Projeto
 
 ### Pré-requisitos
 
@@ -29,7 +29,7 @@ Certifique-se de que as ferramentas abaixo estão instaladas no seu ambiente:
 
 ---
 
-## 📦 Como Executar o Back-end com 
+## Como Executar o Back-end com 
 
 Com o repositório já clonado, deve-se entrar na pasta do backend, usando o comando:
 
@@ -52,7 +52,7 @@ Por fim, inicie o servidor em modo de desenvolvimento, usando o comando:
      - "npx prisma migrate dev --name init"
 ---
 
-## 🖥️ Como Executar o Front-end
+## Como Executar o Front-end
 
 Entre na pasta do front-end, usando o comando:
 
