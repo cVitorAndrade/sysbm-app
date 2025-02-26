@@ -39,7 +39,7 @@ Certifique-se de que as ferramentas abaixo estão instaladas no seu ambiente:
 
 ---
 
-## Como Executar o Back-end com 
+## Como Executar o Back-end 
 
 Com o repositório já clonado, deve-se entrar na pasta do backend, usando o comando:
 
